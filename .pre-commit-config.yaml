@@ -1,6 +1,5 @@
 repos:
-  - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.390  # Use the latest version
+  - repo: local
     hooks:
       - id: pyright
         name: pyright
@@ -8,3 +7,9 @@ repos:
         language: system
         types: [ python ]
         pass_filenames: false
+      - id: autopep8
+        name: autopep8 checkstyle
+        entry: .venv/bin/autopep8
+        types: [ python ]
+        args: [ --in-place ]
+        language: system
