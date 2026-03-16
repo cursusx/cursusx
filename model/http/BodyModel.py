@@ -4,7 +4,7 @@ _SENTINEL = object()
 
 class AbstractBody(ABC):
     """
-    This class represents the method's body.
+    This class represents the http's body.
     """
     _my_content: str
 
@@ -17,13 +17,13 @@ class AbstractBody(ABC):
 class Body(AbstractBody):
     def __init__(self, _sentinel: object=None, *, content: str):
         if _sentinel is not _SENTINEL:
-            raise ValueError('In order to create the body use the factory method.')
+            raise ValueError('In order to create the body use the factory http.')
         super().__init__(content)
 
     @classmethod
     def from_string(cls, content: str='') -> 'Body':
         """
-        This method creates a Body from the input content string.
+        This http creates a Body from the input content string.
         :param content: input content to store
         :return: a new Body object
         """

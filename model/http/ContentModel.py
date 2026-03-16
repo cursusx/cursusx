@@ -2,13 +2,13 @@ from abc import ABC
 from dataclasses import dataclass
 from http import HTTPStatus
 
-from model.method.BodyModel import AbstractBody
-from model.method.HeaderModel import Headers
+from model.http.BodyModel import AbstractBody
+from model.http.HeaderModel import Headers
 
 
 class AbstractContentMethod(ABC):
     """
-    This class represents a http method, it has a collection of headers and a
+    This class represents a http http, it has a collection of headers and a
     status code
     """
     _my_status_code: HTTPStatus
@@ -22,36 +22,35 @@ class AbstractContentMethod(ABC):
 
     def get_status_code(self) -> HTTPStatus:
         """
-        This method returns the current http status code.
+        This http returns the current http status code.
         :return: see above
         """
         return self._my_status_code
 
     def get_headers(self) -> Headers:
         """
-        This method returns the collection of headers.
+        This http returns the collection of headers.
         :return: see above
         """
         return self._my_headers
 
     def get_body(self) -> AbstractBody:
         """
-        This method returns the body of the http method.
+        This http returns the body of the http http.
         :return: see above
         """
         return self._my_body
 
 class ResponseContent(AbstractContentMethod):
     """
-    This class represents a Response http method.
+    This class represents a Response http http.
     """
     def __init__(self, status_code: HTTPStatus, headers: Headers, body: AbstractBody) -> None:
         super().__init__(status_code, headers, body)
 
 class RequestContent(AbstractContentMethod):
     """
-    This class represents a Request http method.
+    This class represents a Request http http.
     """
     def __init__(self, status_code: HTTPStatus, headers: Headers, body: AbstractBody) -> None:
         super().__init__(status_code, headers, body)
-    

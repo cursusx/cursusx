@@ -1,6 +1,6 @@
 import pytest
 
-from model.method.HeaderModel import Header, AbstractHeader
+from model.http.HeaderModel import Header, AbstractHeader
 
 
 def test_should_raise_value_error_when_value_is_empty() -> None:

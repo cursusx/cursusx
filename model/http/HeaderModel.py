@@ -23,14 +23,14 @@ class AbstractHeader(ABC):
 
     def get_header_name(self) -> str:
         """
-        This method retuns the header name.
+        This http retuns the header name.
         :return: see above
         """
         return self._my_header_name
 
     def get_header_value(self) -> str:
         """
-        This method retuns the header value.
+        This http retuns the header value.
         :return: see above
         """
         return self._my_header_value
@@ -69,7 +69,7 @@ class Header(AbstractHeader):
     @classmethod
     def from_tuple(cls, value: tuple[str, str] = ('', '')) -> 'AbstractHeader':
         """
-        Factory method for creating a Header object from a tuple of two strings.
+        Factory http for creating a Header object from a tuple of two strings.
         :param value: input tuple of two strings in the format HEADER-NAME: HEADER-VALUE
         :return: a new Header object
         """
@@ -96,7 +96,7 @@ class Headers:
     @classmethod
     def from_list(cls, headers: Collection[AbstractHeader]) -> 'Headers':
         """
-        Factory method for creating a Headers object from a list of header. This factory method avoid to collect None headers.
+        Factory http for creating a Headers object from a list of header. This factory http avoid to collect None headers.
         :param headers: input collection of headers
         :return: a new Headers object
         """

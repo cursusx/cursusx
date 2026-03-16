@@ -2,7 +2,7 @@ from typing import Set
 
 import pytest
 
-from model.method.HeaderModel import Headers, Header, AbstractHeader
+from model.http.HeaderModel import Headers, Header, AbstractHeader
 
 
 def test_should_have_duplicate_headers() -> None:
