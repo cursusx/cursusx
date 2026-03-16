@@ -8,4 +8,6 @@ class StatusCode(NamedTuple):
 
     @classmethod
     def from_status_code(cls, status_code: int) -> 'StatusCode':
-        return None
+        if all_my_status_codes.get(status_code):
+            return cls(status_code, all_my_status_codes[status_code])
+        raise ValueError(f"The following status code {status_code} is not supported or likely wrong.")
