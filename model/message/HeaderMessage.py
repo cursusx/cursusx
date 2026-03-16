@@ -3,11 +3,18 @@ from dataclasses import dataclass, field
 from typing import NamedTuple, List
 
 
-@dataclass(frozen=True)
 class AbstractHeaderMessage(ABC):
     my_header_name: str
     my_header_value: str
 
+    def __init__(self, my_header_name: str, my_header_value: str):
+        self.my_header_name = my_header_name
+        self.my_header_value = my_header_value
+
+@dataclass(frozen=True)
+class HeaderMessage(AbstractHeaderMessage):
+    def __init__(self, my_header_name: str, my_header_value: str):
+        super().__init__(my_header_name, my_header_value)
     @classmethod
     def from_tuple(cls, value: tuple[str, str]=None) -> 'AbstractHeaderMessage':
         if not value:
