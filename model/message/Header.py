@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 from typing import NamedTuple, List
 
 
-class AbstractHeaderMessage(ABC):
+class AbstractHeader(ABC):
     my_header_name: str
     my_header_value: str
 
@@ -15,11 +15,11 @@ class AbstractHeaderMessage(ABC):
         self.my_header_value = my_header_value
 
 @dataclass(frozen=True)
-class HeaderMessage(AbstractHeaderMessage):
+class Header(AbstractHeader):
     def __init__(self, my_header_name: str, my_header_value: str):
         super().__init__(my_header_name, my_header_value)
     @classmethod
-    def from_tuple(cls, value: tuple[str, str]=None) -> 'AbstractHeaderMessage':
+    def from_tuple(cls, value: tuple[str, str]=None) -> 'AbstractHeader':
         if not value:
             raise ValueError('The input value must not be empty and not None.')
         return cls(value[0], value[1])
@@ -28,4 +28,4 @@ class HeaderMessage(AbstractHeaderMessage):
 
 @dataclass(frozen=True)
 class Headers(NamedTuple):
-    my_headers: List[AbstractHeaderMessage] = field(default_factory=list)
+    my_headers: List[AbstractHeader] = field(default_factory=list)
