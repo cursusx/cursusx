@@ -5,8 +5,9 @@ from model.endpoint.EndPointModel import AbstractEndpoint
 from model.http.BodyModel import AbstractBody
 from model.http.HeaderModel import Headers
 
-#TODO: ADD TESTS
+# TODO: ADD TESTS
 _SENTINEL = object()
+
 
 class AbstractContent(ABC):
     """
@@ -52,13 +53,16 @@ class AbstractContent(ABC):
         """
         return self._my_body
 
+
 class ResponseContent(AbstractContent):
     """
     This class represents a http Response.
     """
-    def __init__(self, _sentinel: object=None, *, endpoint: AbstractEndpoint, status_code: HTTPStatus, headers: Headers, body: AbstractBody) -> None:
+
+    def __init__(self, _sentinel: object = None, *, endpoint: AbstractEndpoint, status_code: HTTPStatus, headers: Headers, body: AbstractBody) -> None:
         if _sentinel is _SENTINEL:
-            raise TypeError("In order to create a Response you have to use the factory http.")
+            raise TypeError(
+                "In order to create a Response you have to use the factory http.")
         super().__init__(endpoint, status_code, headers, body)
 
     @classmethod
@@ -69,9 +73,19 @@ class ResponseContent(AbstractContent):
                    headers=headers,
                    body=body)
 
+
 class RequestContent(AbstractContent):
     """
     This class represents a http Request.
     """
-    def __init__(self, endpoint: AbstractEndpoint, status_code: HTTPStatus, headers: Headers, body: AbstractBody) -> None:
+
+    def __init__(self, _sentinel: object = None, *, endpoint: AbstractEndpoint, status_code: HTTPStatus, headers: Headers, body: AbstractBody) -> None:
+        if _sentinel is _SENTINEL:
+            raise TypeError(
+                "In order to create a Request you have to use the factory http.")
         super().__init__(endpoint, status_code, headers, body)
+
+    @classmethod
+    def create_request(cls, endpoint: AbstractEndpoint, status_code: HTTPStatus, headers: Headers,
+                       body: AbstractBody) -> 'RequestContent':
+        return cls(_sentinel=_SENTINEL, endpoint=endpoint, status_code=status_code, headers=headers, body=body)
