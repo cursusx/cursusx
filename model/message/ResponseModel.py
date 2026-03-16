@@ -5,5 +5,5 @@ from model.message.HeaderModel import Headers
 
 
 class AbstractResponseMessage(ABC):
-    my_status_code: HTTPStatus
-    my_headers: Headers
+    _my_status_code: HTTPStatus
+    _my_headers: Headers
