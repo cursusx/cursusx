@@ -30,6 +30,12 @@ class Header(AbstractHeader):
             raise ValueError('The input value must not be empty and not None.')
         return cls(value[0], value[1])
 
+    def __repr__(self) -> str:
+        return f"""
+        header-name: {self._my_header_name}
+        header-value: {self._my_header_value}
+        """
+
 @dataclass(frozen=True)
 class Headers(NamedTuple):
     my_headers: List[AbstractHeader] = field(default_factory=list)
