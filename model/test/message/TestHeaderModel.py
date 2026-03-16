@@ -17,5 +17,3 @@ def test_should_be_possible_to_retrieve_all_header_attributes() -> None:
     current: AbstractHeader = Header.from_tuple(('content-type', 'text/html'))
     assert current.get_header_name() == 'content-type'
     assert current.get_header_value() == 'text/html'
-
-
