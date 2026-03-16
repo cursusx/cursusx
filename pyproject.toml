@@ -13,3 +13,7 @@ dependencies = [
 [tool.pytest.ini_options]
 testpaths = ["model/test"]
 python_files = "test_*.py"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
