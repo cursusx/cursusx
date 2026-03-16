@@ -5,6 +5,10 @@ from model.message.HeaderModel import Headers
 
 
 class AbstractResponseMessage(ABC):
+    """
+    This class represents a response message, it has a collection of headers and a
+    status code
+    """
     _my_status_code: HTTPStatus
     _my_headers: Headers
 
