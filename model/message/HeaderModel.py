@@ -32,8 +32,8 @@ class Header(AbstractHeader):
 
     def __repr__(self) -> str:
         return f"""
-        header-name: {self._my_header_name}
-        header-value: {self._my_header_value}
+        header-name: <{self._my_header_name}>
+        header-value: <{self._my_header_value}>
         """
 
 @dataclass(frozen=True)
