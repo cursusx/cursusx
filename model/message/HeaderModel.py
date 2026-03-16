@@ -20,6 +20,12 @@ class AbstractHeader(ABC):
     def get_header_value(self) -> str:
         return self._my_header_value
 
+    def __repr__(self) -> str:
+        return f"""
+        header-name: <{self._my_header_name}>
+        header-value: <{self._my_header_value}>
+        """
+
 class Header(AbstractHeader):
     def __init__(self, my_header_name: str, my_header_value: str):
         super().__init__(my_header_name, my_header_value)
@@ -29,12 +35,6 @@ class Header(AbstractHeader):
         if not value or len(value) != 2:
             raise ValueError('The input value must not be empty and not None.')
         return cls(value[0], value[1])
-
-    def __repr__(self) -> str:
-        return f"""
-        header-name: <{self._my_header_name}>
-        header-value: <{self._my_header_value}>
-        """
 
 @dataclass(frozen=True)
 class Headers(NamedTuple):
