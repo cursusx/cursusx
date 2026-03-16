@@ -24,8 +24,6 @@ class Header(AbstractHeader):
             raise ValueError('The input value must not be empty and not None.')
         return cls(value[0], value[1])
 
-
-
 @dataclass(frozen=True)
 class Headers(NamedTuple):
     my_headers: List[AbstractHeader] = field(default_factory=list)
