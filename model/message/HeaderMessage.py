@@ -13,3 +13,9 @@ class Headers(NamedTuple):
         if not _internal:
             raise TypeError('You can not use the default contructor, instead use the factory class method.')
         cls.my_headers = my_headers
+
+    @classmethod
+    def create_headers_from_collection(cls, headers: list[AbstractHeaderMessage]=None) -> 'Headers':
+        if not headers:
+            headers = list()
+        return Headers(headers, _internal=True)
