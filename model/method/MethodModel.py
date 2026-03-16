@@ -6,7 +6,7 @@ from model.method.BodyModel import AbstractBody
 from model.method.HeaderModel import Headers
 
 
-class AbstractMethod(ABC):
+class AbstractContentMethod(ABC):
     """
     This class represents a http method, it has a collection of headers and a
     status code
@@ -41,14 +41,14 @@ class AbstractMethod(ABC):
         """
         return self._my_body
 
-class ResponseMethod(AbstractMethod):
+class ResponseContent(AbstractContentMethod):
     """
     This class represents a Response http method.
     """
     def __init__(self, status_code: HTTPStatus, headers: Headers, body: AbstractBody) -> None:
         super().__init__(status_code, headers, body)
 
-class RequestMethod(AbstractMethod):
+class RequestContent(AbstractContentMethod):
     """
     This class represents a Request http method.
     """
