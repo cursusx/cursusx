@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [tool.pytest.ini_options]
-testpaths = ["model/test"]
+testpaths = ["test"]
 python_files = "Test*.py"
 
 [tool.pyright]
