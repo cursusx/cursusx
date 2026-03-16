@@ -2,4 +2,5 @@ from abc import ABC, abstractmethod
 
 
 class AbstractHost(ABC):
-    pass
+    _my_endpoint: str
+    _my_port: int
