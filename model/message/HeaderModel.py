@@ -4,20 +4,20 @@ from typing import NamedTuple, List
 
 
 class AbstractHeader(ABC):
-    my_header_name: str
-    my_header_value: str
+    _my_header_name: str
+    _my_header_value: str
 
     def __init__(self, my_header_name: str='', my_header_value: str=''):
         if len(my_header_name) == 0 or len(my_header_value) == 0:
             raise TypeError(f"The header name cannot be None -> {my_header_name},"
                             f" the header value cannot be None -> {my_header_value}.")
-        self.my_header_name = my_header_name
-        self.my_header_value = my_header_value
+        self._my_header_name = my_header_name
+        self._my_header_value = my_header_value
 
-@dataclass(frozen=True)
 class Header(AbstractHeader):
     def __init__(self, my_header_name: str, my_header_value: str):
         super().__init__(my_header_name, my_header_value)
+
     @classmethod
     def from_tuple(cls, value: tuple[str, str]=('', '')) -> 'AbstractHeader':
         if not value or len(value) != 2:
