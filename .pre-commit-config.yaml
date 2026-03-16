@@ -3,5 +3,8 @@ repos:
     rev: v1.1.390  # Use the latest version
     hooks:
       - id: pyright
-        additional_dependencies: []
+        name: pyright
+        entry: .venv/bin/pyright
         language: system
+        types: [ python ]
+        pass_filenames: false
