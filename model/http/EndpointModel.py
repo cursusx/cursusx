@@ -19,4 +19,4 @@ class BasicEndpoint(AbstractEndpoint):
 
     def __init__(self, url: str, port: int):
         super().__init__(url, port)
-    #TODO: add factory method, add tests
+    #TODO: add factory http, add tests
