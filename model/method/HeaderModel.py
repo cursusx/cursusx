@@ -67,8 +67,8 @@ class Headers(NamedTuple):
     @classmethod
     def from_list(cls, headers: list[AbstractHeader]) -> 'Headers':
         """
-        Factory method for creating a Headers object from a list of header.
+        Factory method for creating a Headers object from a list of header. This factory method avoid to collect None headers.
         :param headers: input collection of headers
         :return: a new Headers object
         """
-        return cls(list(headers))
+        return cls([header for header in headers if header])
