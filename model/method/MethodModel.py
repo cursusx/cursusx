@@ -1,12 +1,12 @@
 from abc import ABC
 from http import HTTPStatus
 
-from model.message.HeaderModel import Headers
+from model.method.HeaderModel import Headers
 
 
-class AbstractResponseMessage(ABC):
+class AbstractMethod(ABC):
     """
-    This class represents a response message, it has a collection of headers and a
+    This class represents a http method, it has a collection of headers and a
     status code
     """
     _my_status_code: HTTPStatus
