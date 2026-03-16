@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class AbstractHost(ABC):
+class AbstractEndpoint(ABC):
     _my_url: str
     _my_port: int
 
@@ -15,6 +15,8 @@ class AbstractHost(ABC):
     def get_port(self) -> int:
         return self._my_port
 
-class BasicHost(AbstractHost):
+class BasicEndpoint(AbstractEndpoint):
+
     def __init__(self, url: str, port: int):
         super().__init__(url, port)
+    #TODO: add factory method, add tests
