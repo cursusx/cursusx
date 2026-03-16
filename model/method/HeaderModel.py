@@ -61,12 +61,15 @@ class Header(AbstractHeader):
             raise ValueError('The input value must not be empty and not None.')
         return cls(_sentinel=_SENTINEL, my_header_name=value[0], my_header_value=value[1])
 
-@dataclass(frozen=True)
-class Headers(NamedTuple):
+class Headers:
     """
     This class represents a collection of headers.
     """
-    my_headers: List[AbstractHeader] = field(default_factory=list)
+    _my_headers: List[AbstractHeader]
+    def __init__(self, _sentinel: object=None, *, headers: List[AbstractHeader]):
+        if _sentinel is not _SENTINEL:
+            raise TypeError("In order to create the Headers class you have to use the factory methods.")
+        self.my_headers = headers
 
     @classmethod
     def from_list(cls, headers: list[AbstractHeader]) -> 'Headers':
@@ -75,4 +78,4 @@ class Headers(NamedTuple):
         :param headers: input collection of headers
         :return: a new Headers object
         """
-        return cls([header for header in headers if header])
+        return cls(_sentinel=_SENTINEL, headers=[header for header in headers if header])
