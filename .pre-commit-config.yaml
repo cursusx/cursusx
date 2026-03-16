@@ -3,3 +3,5 @@ repos:
     rev: v1.1.390  # Use the latest version
     hooks:
       - id: pyright
+        additional_dependencies: [ ]
+        language: system
