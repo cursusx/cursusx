@@ -1,6 +1,7 @@
 import pytest
 
-from model.message.HeaderModel import Header
+from model.message.HeaderModel import Header, AbstractHeader
+
 
 def test_should_raise_value_error_when_value_is_empty() -> None:
     with pytest.raises(TypeError):
@@ -11,5 +12,10 @@ def test_should_be_possible_to_create_header_from_non_empty_tuple() -> None:
         Header.from_tuple(('content-type', 'text/html'))
     except ValueError:
         pytest.fail('When the input is a tuple it should be ok.')
+
+def test_should_be_possible_to_retrieve_all_header_attributes() -> None:
+    current: AbstractHeader = Header.from_tuple(('content-type', 'text/html'))
+    assert current.get_header_name() == 'content-type'
+    assert current.get_header_value() == 'text/html'
 
 
