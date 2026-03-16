@@ -100,4 +100,6 @@ class Headers:
         :param headers: input collection of headers
         :return: a new Headers object
         """
+        if len(headers) == 0:
+            raise ValueError('The input collection must not be empty.')
         return cls(_sentinel=_SENTINEL, headers=[ header for header in headers if header ])
