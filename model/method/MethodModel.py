@@ -18,9 +18,17 @@ class AbstractMethod(ABC):
         self._my_headers = headers
 
     def get_status_code(self) -> HTTPStatus:
+        """
+        This method returns the current http status code.
+        :return: see above
+        """
         return self._my_status_code
 
     def get_headers(self) -> Headers:
+        """
+        This method returns the collection of headers.
+        :return: see above
+        """
         return self._my_headers
 
 class ResponseMethod(AbstractMethod):
