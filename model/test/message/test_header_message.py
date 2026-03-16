@@ -1,10 +1,9 @@
-from typing import NoReturn
 import pytest
 
-from model.message.HeaderMessage import HeaderMessage
+from model.message.HeaderModel import Header
 
 def test_should_raise_value_error_when_value_is_empty() -> None:
     with pytest.raises(ValueError):
-        HeaderMessage.from_tuple(None)
+        Header.from_tuple()
 
 
