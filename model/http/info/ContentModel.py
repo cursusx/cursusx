@@ -1,9 +1,9 @@
 from abc import ABC
 from http import HTTPStatus
 
-from model.endpoint.EndPointModel import AbstractEndpoint
-from model.http.BodyModel import AbstractBody
-from model.http.HeaderModel import Headers
+from model.http.info.EndpointModel import AbstractEndpoint
+from model.http.info.BodyModel import AbstractBody
+from model.http.info.HeaderModel import Headers
 
 # TODO: ADD TESTS
 _SENTINEL = object()

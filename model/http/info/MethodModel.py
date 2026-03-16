@@ -1,7 +1,8 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 from http import HTTPMethod
 
-from model.http.ContentModel import RequestContent, ResponseContent
+from model.http.info.ContentModel import RequestContent
+
 
 # TODO: add tests
 

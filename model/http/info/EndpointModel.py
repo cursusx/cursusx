@@ -15,8 +15,9 @@ class AbstractEndpoint(ABC):
     def get_port(self) -> int:
         return self._my_port
 
+
 class BasicEndpoint(AbstractEndpoint):
 
     def __init__(self, url: str, port: int):
         super().__init__(url, port)
-    #TODO: add factory http, add tests
+    # TODO: add factory http, add tests

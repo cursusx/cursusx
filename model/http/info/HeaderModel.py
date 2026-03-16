@@ -14,7 +14,7 @@ class AbstractHeader(ABC):
     _my_header_name: str
     _my_header_value: str
 
-    def __init__(self, my_header_name: str='', my_header_value: str=''):
+    def __init__(self, my_header_name: str = '', my_header_value: str = ''):
         if len(my_header_name) == 0 or len(my_header_value) == 0:
             raise TypeError(f"The header name cannot be None -> {my_header_name},"
                             f" the header value cannot be None -> {my_header_value}.")
@@ -57,13 +57,16 @@ class AbstractHeader(ABC):
     def __hash__(self) -> int:
         return hash((self._my_header_name, self._my_header_value))
 
+
 class Header(AbstractHeader):
     """
     Basic header implementation.
     """
-    def __init__(self, _sentinel: object=None, *, my_header_name: str, my_header_value: str):
+
+    def __init__(self, _sentinel: object = None, *, my_header_name: str, my_header_value: str):
         if _sentinel is not _SENTINEL:
-            raise TypeError("In order to create the Header you have to use the factory methods.")
+            raise TypeError(
+                "In order to create the Header you have to use the factory methods.")
         super().__init__(my_header_name, my_header_value)
 
     @classmethod
@@ -77,15 +80,18 @@ class Header(AbstractHeader):
             raise ValueError('The input value must not be empty and not None.')
         return cls(_sentinel=_SENTINEL, my_header_name=value[0], my_header_value=value[1])
 
+
 class Headers:
     """
     This class represents a collection of headers.
     """
 
     _my_headers: Set[AbstractHeader] = set()
-    def __init__(self, _sentinel: object=None, *, headers: Collection[AbstractHeader]):
+
+    def __init__(self, _sentinel: object = None, *, headers: Collection[AbstractHeader]):
         if _sentinel is not _SENTINEL:
-            raise TypeError("In order to create the Headers class you have to use the factory methods.")
+            raise TypeError(
+                "In order to create the Headers class you have to use the factory methods.")
 
         for header in headers:
             self._my_headers.add(header)
@@ -102,4 +108,4 @@ class Headers:
         """
         if len(headers) == 0:
             raise ValueError('The input collection must not be empty.')
-        return cls(_sentinel=_SENTINEL, headers=[ header for header in headers if header ])
+        return cls(_sentinel=_SENTINEL, headers=[header for header in headers if header])
