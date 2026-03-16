@@ -7,7 +7,10 @@ class AbstractHeaderMessage(ABC):
     my_header_name: str
     my_header_value: str
 
-    def __init__(self, my_header_name: str, my_header_value: str):
+    def __init__(self, my_header_name: str=None, my_header_value: str=None):
+        if not my_header_name or not my_header_value:
+            raise TypeError(f"The header name cannot be None -> {my_header_name},"
+                            f" the header value cannot be None -> {my_header_value}.")
         self.my_header_name = my_header_name
         self.my_header_value = my_header_value
 
