@@ -33,3 +33,7 @@ class Header(AbstractHeader):
 @dataclass(frozen=True)
 class Headers(NamedTuple):
     my_headers: List[AbstractHeader] = field(default_factory=list)
+
+    @classmethod
+    def from_list(cls, headers: list[AbstractHeader]) -> 'Headers':
+        return cls(list(headers))
