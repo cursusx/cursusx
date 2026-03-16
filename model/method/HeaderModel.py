@@ -1,6 +1,6 @@
 from abc import ABC
-from dataclasses import dataclass, field
-from typing import NamedTuple, List
+from collections.abc import Collection
+from typing import Set
 
 _SENTINEL = object()
 
@@ -41,6 +41,22 @@ class AbstractHeader(ABC):
         header-value: <{self._my_header_value}>
         """
 
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, AbstractHeader):
+            return False
+
+        other_object: AbstractHeader = other
+        if other_object.get_header_name() != self._my_header_name:
+            return False
+
+        if other_object.get_header_value() != self._my_header_value:
+            return False
+
+        return True
+
+    def __hash__(self) -> int:
+        return hash((self._my_header_name, self._my_header_value))
+
 class Header(AbstractHeader):
     """
     Basic header implementation.
@@ -65,17 +81,23 @@ class Headers:
     """
     This class represents a collection of headers.
     """
-    _my_headers: List[AbstractHeader]
-    def __init__(self, _sentinel: object=None, *, headers: List[AbstractHeader]):
+
+    _my_headers: Set[AbstractHeader] = set()
+    def __init__(self, _sentinel: object=None, *, headers: Collection[AbstractHeader]):
         if _sentinel is not _SENTINEL:
             raise TypeError("In order to create the Headers class you have to use the factory methods.")
-        self.my_headers = headers
+
+        for header in headers:
+            self._my_headers.add(header)
+
+    def get_headers(self) -> Set[AbstractHeader]:
+        return self._my_headers
 
     @classmethod
-    def from_list(cls, headers: list[AbstractHeader]) -> 'Headers':
+    def from_list(cls, headers: Collection[AbstractHeader]) -> 'Headers':
         """
         Factory method for creating a Headers object from a list of header. This factory method avoid to collect None headers.
         :param headers: input collection of headers
         :return: a new Headers object
         """
-        return cls(_sentinel=_SENTINEL, headers=[header for header in headers if header])
+        return cls(_sentinel=_SENTINEL, headers=[ header for header in headers if header ])
