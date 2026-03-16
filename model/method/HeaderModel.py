@@ -2,6 +2,8 @@ from abc import ABC
 from dataclasses import dataclass, field
 from typing import NamedTuple, List
 
+_SENTINEL = object()
+
 
 class AbstractHeader(ABC):
     """
@@ -43,7 +45,9 @@ class Header(AbstractHeader):
     """
     Basic header implementation.
     """
-    def __init__(self, my_header_name: str, my_header_value: str):
+    def __init__(self, _sentinel: object=None, *, my_header_name: str, my_header_value: str):
+        if _sentinel is not _SENTINEL:
+            raise TypeError("In order to create the Header you have to use the factory methods.")
         super().__init__(my_header_name, my_header_value)
 
     @classmethod
@@ -55,7 +59,7 @@ class Header(AbstractHeader):
         """
         if not value or len(value) != 2:
             raise ValueError('The input value must not be empty and not None.')
-        return cls(value[0], value[1])
+        return cls(_sentinel=_SENTINEL, my_header_name=value[0], my_header_value=value[1])
 
 @dataclass(frozen=True)
 class Headers(NamedTuple):

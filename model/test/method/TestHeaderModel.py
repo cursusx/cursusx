@@ -7,6 +7,10 @@ def test_should_raise_value_error_when_value_is_empty() -> None:
     with pytest.raises(TypeError):
         Header.from_tuple()
 
+def test_should_not_be_possible_to_use_header_constructor() -> None:
+    with pytest.raises(TypeError):
+        Header(None, my_header_name='a name', my_header_value='a value')
+
 def test_should_be_possible_to_create_header_from_non_empty_tuple() -> None:
     try:
         Header.from_tuple(('content-type', 'text/html'))
