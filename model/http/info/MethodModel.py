@@ -17,3 +17,6 @@ class AbstractHttpMethod(ABC):
 
     def get_http_request(self) -> RequestContent:
         return self._my_http_request
+
+    def get_http_method(self) -> HTTPMethod:
+        return self._my_http_method
