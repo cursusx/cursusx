@@ -11,7 +11,7 @@ _SENTINEL = object()
 
 class AbstractContent(ABC):
     """
-    This class represents a http http.
+    This class represents an http content.
     It has an endpoint, a status code, a collection of headers and a body.
     """
     _my_endpoint: AbstractEndpoint
