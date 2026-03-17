@@ -1,6 +1,6 @@
 # Byte-compiled / optimized / DLL files
 .idea
-*uv.lock
+uv.lock
 __pycache__/
 *.py[codz]
 *$py.class
