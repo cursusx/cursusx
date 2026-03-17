@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import TypeVar, Generic
 
 from model.builder.BuilderModel import AbstractBuilder
-from model.http.info.ContentModel import AbstractContent
+from model.http.info.content.ContentModel import AbstractContent
 
 _T = TypeVar("_T", bound=AbstractContent)
 

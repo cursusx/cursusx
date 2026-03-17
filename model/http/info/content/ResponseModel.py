@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
 from model.http.info.BodyModel import AbstractBody
-from model.http.info.ContentModel import AbstractContent
+from model.http.info.content.ContentModel import AbstractContent
 from model.http.info.EndpointModel import AbstractEndpoint
 from model.http.info.HeaderModel import Headers
 from model.http.info.ParameterModel import Parameters

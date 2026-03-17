@@ -3,7 +3,7 @@ from http import HTTPMethod
 
 from model.http.engine.EngineModel import AbstractEngine
 from model.http.info.MethodModel import AbstractHttpMethod
-from model.http.info.impl.ResponseModel import ResponseContent
+from model.http.info.content.ResponseModel import ResponseContent
 
 
 class AbstractHttpEngine(AbstractEngine[ResponseContent]):

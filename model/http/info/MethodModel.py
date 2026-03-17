@@ -1,7 +1,7 @@
 from abc import ABC
 from http import HTTPMethod
 
-from model.http.info.impl.RequestModel import RequestContent
+from model.http.info.content.RequestModel import RequestContent
 
 
 # TODO: add tests

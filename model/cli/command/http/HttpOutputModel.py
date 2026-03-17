@@ -1,5 +1,5 @@
 from model.cli.command.OutputModel import AbstractOutput
-from model.http.info.impl.ResponseModel import ResponseContent
+from model.http.info.content.ResponseModel import ResponseContent
 
 
 class HttpOutput(AbstractOutput[ResponseContent, str]):
