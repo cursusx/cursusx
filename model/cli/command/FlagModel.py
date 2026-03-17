@@ -1,23 +1,26 @@
 from abc import ABC, abstractmethod
 from re import Pattern
-from typing import Generic
+from typing import Generic, NoReturn
 
 from typing_extensions import TypeVar
 
-from model.cli.command.CommandModel import AbstractCommand
-from model.cli.command.OutputModel import AbstractOutput
+from model.cli.command.QueryBuilderModel import AbstractQueryBuilder
 
-_V = TypeVar("_V", bound=AbstractCommand)
+_T = TypeVar("_T", bound=AbstractQueryBuilder)
 
-
-class AbstractFlagLogic(ABC, Generic[_V]):
-    @abstractmethod
-    def apply_flag_logic(self, command: _V) -> AbstractOutput:
-        pass
+# TODO: at each command, create a new query builder and pass it to each flag value
 
 
-class AbstractFlagValue(ABC):
+class AbstractFlagValue(ABC, Generic[_T]):
+    """
+    This class represent the value of a flag, so what is after the equal in the flag definition.
+    -myflag=value <- this
+    """
+    _my_query_builder: _T
     _my_representation: Pattern
+
+    def __init__(self, my_query_builder: _T):
+        self._my_query_builder = my_query_builder
 
     def is_valid_flag_value(self, flag_value: str) -> bool:
         """
@@ -27,19 +30,21 @@ class AbstractFlagValue(ABC):
         """
         return self._my_representation.match(flag_value) is not None
 
+    @abstractmethod
+    def match_value(self, flag_value: str) -> None:
+        pass
 
-class AbstractFlag(ABC, Generic[_V]):
+
+class AbstractFlag(ABC, Generic[_T]):
     """
     This class represents a specific command flag, defined in this way:
     -name=value
     """
     _my_name: str
-    _my_logic: AbstractFlagLogic[_V]
-    _my_flag_value: AbstractFlagValue
+    _my_flag_value: AbstractFlagValue[_T]
 
-    def __init__(self, my_name: str, my_logic: AbstractFlagLogic[_V], my_flag_value: AbstractFlagValue):
+    def __init__(self, my_name: str, my_flag_value: AbstractFlagValue[_T]):
         self._my_name = my_name
-        self._my_logic = my_logic
         self._my_flag_value = my_flag_value
 
     @abstractmethod
