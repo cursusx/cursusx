@@ -7,7 +7,6 @@ from requests import Response
 from model.http.engine.EngineModel import AbstractEngine
 from model.http.info.BodyModel import Body
 from model.http.info.ContentModel import ResponseContent
-from model.http.info.EndpointModel import AbstractEndpoint
 from model.http.info.HeaderModel import Headers
 from model.http.info.MethodModel import AbstractHttpMethod
 from model.http.info.ParameterModel import Parameters
@@ -20,6 +19,20 @@ class StandardEngine(AbstractEngine):
     def _do_get(self, http_request: AbstractHttpMethod) -> ResponseContent:
         return self._execute_request(http_request.get_http_method(),
                                      http_request)
+
+    def _do_post(self, http_request: AbstractHttpMethod) -> ResponseContent:
+        return self._execute_request(http_request.get_http_method(),
+                                     http_request)
+
+    def _do_put(self, http_request: AbstractHttpMethod) -> ResponseContent:
+        return self._execute_request(http_request.get_http_method(),
+                                     http_request)
+
+    def _do_delete(self, http_request: AbstractHttpMethod) -> ResponseContent:
+        return self._execute_request(http_request.get_http_method(), http_request)
+
+    def _do_patch(self, http_request: AbstractHttpMethod) -> ResponseContent:
+        return self._execute_request(http_request.get_http_method(), http_request)
 
     def _execute_request(self, method: str, request: AbstractHttpMethod) -> ResponseContent:
         response: Response = requests.request(method=method,
