@@ -3,6 +3,7 @@ from http import HTTPStatus
 import requests
 from requests import Response
 
+from model.cli.command.http.Contants import STANDARD_ENGINE_NAME
 from model.http.engine.HttpEngineModel import AbstractHttpEngine
 from model.http.info.body.BodyModel import Body
 from model.http.info.header.HeaderModel import Headers
@@ -13,7 +14,7 @@ from model.http.info.content.ResponseModel import ResponseContent
 
 class StandardHttpEngine(AbstractHttpEngine):
     def __init__(self):
-        super().__init__('requests')
+        super().__init__(STANDARD_ENGINE_NAME)
 
     def _do_get(self, http_request: AbstractHttpData) -> ResponseContent:
         return self._execute_request(http_request.get_http_method(),
