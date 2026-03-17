@@ -3,8 +3,7 @@ from http import HTTPMethod
 
 from model.http.info.content.RequestModel import RequestContent
 
-
-# TODO: add tests
+_SENTINEL = object()
 
 
 class AbstractHttpData(ABC):
@@ -23,5 +22,14 @@ class AbstractHttpData(ABC):
 
 
 class HttpData(AbstractHttpData):
-    def __init__(self, method: HTTPMethod, request: RequestContent):
+    def __init__(self, _sentinel: object = None, *, method: HTTPMethod, request: RequestContent):
+        if _sentinel is None:
+            raise TypeError(
+                "In order to create this class you have to use the factory method.")
         super().__init__(method, request)
+
+    @classmethod
+    def create_endpoint(cls, method: HTTPMethod, request: RequestContent):
+        if method is None or request is None:
+            raise ValueError("The input parameters cannot be None.")
+        return cls(_sentinel=_SENTINEL, method=method, request=request)
