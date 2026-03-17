@@ -1,5 +1,4 @@
 from http import HTTPStatus
-from typing import Iterable, Mapping, Any
 
 import requests
 from requests import Response
