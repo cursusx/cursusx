@@ -15,6 +15,9 @@ class AbstractEndpoint(ABC):
     def get_port(self) -> int:
         return self._my_port
 
+    def dump(self) -> str:
+        return f"{self._my_url}:{self._my_port}"
+
 
 class BasicEndpoint(AbstractEndpoint):
 
