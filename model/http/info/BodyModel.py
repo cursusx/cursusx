@@ -1,4 +1,5 @@
 from abc import ABC
+from typing import Generic, TypeVar, NamedTuple, Any
 
 _SENTINEL = object()
 
@@ -31,3 +32,10 @@ class Body(AbstractBody):
         :return: a new Body object
         """
         return cls(_sentinel=_SENTINEL, content=content)
+
+    @classmethod
+    def from_dict(cls, content: dict[Any, Any]) -> 'Body':
+        import json
+        if len(content) == 0:
+            return cls(_sentinel=_SENTINEL, content='')
+        return cls(_sentinel=_SENTINEL, content=json.dumps(content))
