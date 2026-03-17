@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from model.http.engine.EngineModel import AbstractHttpEngine
+from model.http.engine.HttpEngineModel import AbstractHttpEngine
 
 
 class AbstractCommand(ABC):
@@ -15,3 +15,4 @@ class AbstractCommand(ABC):
 
 class AbstractHttpCommand(AbstractCommand):
     _my_http_engine: AbstractHttpEngine
+    pass

@@ -1,54 +1,12 @@
 from abc import ABC, abstractmethod
-from http import HTTPMethod
+from typing import Generic, TypeVar
 
-from model.http.info.ContentModel import ResponseContent
 from model.http.info.MethodModel import AbstractHttpMethod
 
+_B: TypeVar = TypeVar("_B")
 
-class AbstractHttpEngine(ABC):
-    """
-    This is the engine for making all the http requests
-    """
-    _my_engine_name: str
 
-    def __init__(self, my_engine_name: str):
-        self._my_engine_name = my_engine_name
-
-    def get_engine_name(self) -> str:
-        return self._my_engine_name
-
-    def do_query(self, http_request: AbstractHttpMethod) -> ResponseContent:
-        match http_request.get_http_method():
-            case HTTPMethod.GET:
-                return self._do_get(http_request)
-            case HTTPMethod.POST:
-                return self._do_post(http_request)
-            case HTTPMethod.PUT:
-                return self._do_put(http_request)
-            case HTTPMethod.DELETE:
-                return self._do_delete(http_request)
-            case HTTPMethod.PATCH:
-                return self._do_patch(http_request)
-            case not_supported:
-                raise ValueError(
-                    f"The input http method: {not_supported} is not supported.")
-
+class AbstractEngine(ABC):
     @abstractmethod
-    def _do_get(self, http_request: AbstractHttpMethod) -> ResponseContent:
-        pass
-
-    @abstractmethod
-    def _do_post(self, http_request: AbstractHttpMethod) -> ResponseContent:
-        pass
-
-    @abstractmethod
-    def _do_put(self, http_request: AbstractHttpMethod) -> ResponseContent:
-        pass
-
-    @abstractmethod
-    def _do_delete(self, http_request: AbstractHttpMethod) -> ResponseContent:
-        pass
-
-    @abstractmethod
-    def _do_patch(self, http_request: AbstractHttpMethod) -> ResponseContent:
+    def analyze[_B](self, request: AbstractHttpMethod) -> _B:
         pass
