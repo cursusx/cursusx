@@ -15,4 +15,7 @@ class AbstractCommand(ABC):
 
 class AbstractHttpCommand(AbstractCommand):
     _my_http_engine: AbstractHttpEngine
-    pass
+
+    @abstractmethod
+    def get_description(self) -> str:
+        pass
