@@ -3,7 +3,7 @@ from http import HTTPStatus
 import requests
 from requests import Response
 
-from model.http.engine.EngineModel import AbstractEngine
+from model.http.engine.EngineModel import AbstractHttpEngine
 from model.http.info.BodyModel import Body
 from model.http.info.ContentModel import ResponseContent
 from model.http.info.HeaderModel import Headers
@@ -11,7 +11,7 @@ from model.http.info.MethodModel import AbstractHttpMethod
 from model.http.info.ParameterModel import Parameters
 
 
-class StandardEngine(AbstractEngine):
+class StandardEngine(AbstractHttpEngine):
     def __init__(self):
         super().__init__('requests')
 
