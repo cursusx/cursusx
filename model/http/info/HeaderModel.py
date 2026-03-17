@@ -1,6 +1,6 @@
 from abc import ABC
 from collections.abc import Collection
-from typing import Set
+from typing import Set, Mapping
 
 _SENTINEL = object()
 
@@ -109,3 +109,7 @@ class Headers:
         if len(headers) == 0:
             raise ValueError('The input collection must not be empty.')
         return cls(_sentinel=_SENTINEL, headers=[header for header in headers if header])
+
+    @classmethod
+    def from_dictionary(cls, headers: Mapping[str, str]) -> 'Headers':
+        return cls(_sentinel=_SENTINEL, headers=[Header.from_tuple((key, value)) for key, value in headers.items()])
