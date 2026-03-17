@@ -13,8 +13,8 @@ repos:
         types: [ python ]
         args: [ --in-place ]
         language: system
-#      - id: pytest
-#        name: run all tests
-#        entry: .venv/bin/pytest
-#        types: [ python ]
-#        language: system
+      - id: pytest
+        name: run all tests
+        entry: .venv/bin/pytest
+        types: [ python ]
+        language: system
