@@ -1,6 +1,7 @@
 from abc import ABC
 
 _SENTINEL = object()
+UPPER_PORT_LIMIT = 65535
 
 
 class AbstractEndpoint(ABC):
@@ -33,6 +34,6 @@ class BasicEndpoint(AbstractEndpoint):
     def create_endpoint(cls, url: str = '', port: int = -1) -> 'BasicEndpoint':
         if url == '':
             raise ValueError("The url cannot be empty.")
-        if port < 0 or port > 65535:
+        if port < 0 or port > UPPER_PORT_LIMIT:
             raise ValueError("Port must be between 0 and 65535.")
         return cls(_sentinel=_SENTINEL, url=url, port=port)
