@@ -1,6 +1,6 @@
 from abc import ABC
 from collections.abc import Collection
-from typing import Set, Mapping, Iterable
+from typing import Set, Mapping
 
 from model.http.info.ContentModel import IterableContent
 
