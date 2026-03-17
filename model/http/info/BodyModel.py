@@ -1,5 +1,5 @@
 from abc import ABC
-from typing import Generic, TypeVar, NamedTuple, Any
+from typing import Any
 
 _SENTINEL = object()
 
