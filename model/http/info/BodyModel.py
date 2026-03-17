@@ -27,7 +27,7 @@ class Body(AbstractBody):
     @classmethod
     def from_string(cls, content: str = '') -> 'Body':
         """
-        This http creates a Body from the input content string.
+        This factory method creates a Body from the input content string.
         :param content: input content to store
         :return: a new Body object
         """
@@ -35,6 +35,11 @@ class Body(AbstractBody):
 
     @classmethod
     def from_dict(cls, content: dict[Any, Any]) -> 'Body':
+        """
+        This factory method creates a Body from the input content dictionary.
+        :param content: input content dict to store
+        :return: a new Body object
+        """
         import json
         if len(content) == 0:
             return cls(_sentinel=_SENTINEL, content='')
