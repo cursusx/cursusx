@@ -16,7 +16,7 @@ class RequestContent(AbstractContent):
     """
 
     def __init__(self, _sentinel: object = None, *, endpoint: AbstractEndpoint, status_code: HTTPStatus, headers: Headers, parameters: Parameters, body: AbstractBody) -> None:
-        if _sentinel is _SENTINEL:
+        if _sentinel is None:
             raise TypeError(
                 "In order to create a Request you have to use the factory http.")
         super().__init__(endpoint, status_code, headers, parameters, body)
