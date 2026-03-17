@@ -2,9 +2,9 @@ from abc import ABC, abstractmethod
 from typing import TypeVar, Generic
 
 from model.builder.BuilderModel import AbstractBuilder
-from model.cli.command.CommandModel import AbstractCommand
+from model.http.info.ContentModel import AbstractContent
 
-_T = TypeVar("_T", bound=AbstractCommand)
+_T = TypeVar("_T", bound=AbstractContent)
 
 
 class AbstractQueryBuilder(ABC, Generic[_T]):
