@@ -1,7 +1,6 @@
 from abc import ABC
-from typing import Collection, Iterable
+from typing import Collection, Iterable, Set
 
-from model.http.info.BodyModel import AbstractBody
 from model.http.info.ContentModel import IterableContent
 
 _SENTINEL = object()
@@ -52,6 +51,13 @@ class Parameters(IterableContent[Iterable[tuple[str, str]]]):
             raise TypeError(
                 'In order to create this class, use the factory method.')
         self._my_parameters = my_parameters
+
+    def get_parameters(self) -> Set[Parameter]:
+        """
+        This method returns the collection of all parameters.
+        :return: see above.
+        """
+        return self._my_parameters
 
     def dump(self) -> Iterable[tuple[str, str]]:
         """
