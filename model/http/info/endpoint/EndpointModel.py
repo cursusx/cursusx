@@ -1,4 +1,6 @@
-from abc import ABC, abstractmethod
+from abc import ABC
+
+_SENTINEL = object()
 
 
 class AbstractEndpoint(ABC):
@@ -21,6 +23,16 @@ class AbstractEndpoint(ABC):
 
 class BasicEndpoint(AbstractEndpoint):
 
-    def __init__(self, url: str, port: int):
+    def __init__(self, _sentinel: object = None, *,  url: str, port: int):
+        if _sentinel is None:
+            raise TypeError(
+                "In order to create the endpoint you should use the factory method.")
         super().__init__(url, port)
-    # TODO: add factory http, add tests
+
+    @classmethod
+    def create_endpoint(cls, url: str = '', port: int = -1) -> 'BasicEndpoint':
+        if url == '':
+            raise ValueError("The url cannot be empty.")
+        if port < 0 or port > 65535:
+            raise ValueError("Port must be between 0 and 65535.")
+        return cls(_sentinel=_SENTINEL, url=url, port=port)
