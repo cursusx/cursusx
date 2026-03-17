@@ -20,11 +20,3 @@ class AbstractOutput(ABC, Generic[_T, _O]):
     @abstractmethod
     def wrap_output(self) -> _O:
         pass
-
-
-class HttpOutput(AbstractOutput[ResponseContent, str]):
-    def __init__(self, output: ResponseContent):
-        super().__init__(output)
-
-    def wrap_output(self) -> str:
-        return ""
