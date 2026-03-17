@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
 
 from model.cli.command.FlagModel import AbstractFlag
-from model.cli.command.OutputModel import AbstractOutput
+from model.cli.command.OutputModel import AbstractOutput, HttpOutput
 from model.http.engine.HttpEngineModel import AbstractHttpEngine
+from model.http.info.ContentModel import ResponseContent
 from model.http.info.MethodModel import AbstractHttpMethod
 
 
@@ -33,3 +34,18 @@ class AbstractHttpCommand(AbstractCommand):
     @abstractmethod
     def execute_http_command(self, request: AbstractHttpMethod) -> AbstractOutput:
         pass
+
+
+class HttpCommand(AbstractHttpCommand):
+    def __init__(self, http_engine: AbstractHttpEngine, command_name: str, flags: dict[str, AbstractFlag]):
+        super().__init__(http_engine, command_name, flags)
+
+    def get_description(self) -> str:
+        # TODO: ADD flag dump
+        return f"""
+        This command executes http commands, all the supported flags are:
+        """
+
+    def execute_http_command(self, request: AbstractHttpMethod) -> AbstractOutput:
+        response: ResponseContent = self._my_http_engine.do_query(request)
+        return HttpOutput(response)
