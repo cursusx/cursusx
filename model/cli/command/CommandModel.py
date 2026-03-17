@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 
+from model.cli.command.OutputModel import AbstractOutput
 from model.http.engine.HttpEngineModel import AbstractHttpEngine
+from model.http.info.MethodModel import AbstractHttpMethod
 
 
 class AbstractCommand(ABC):
@@ -18,4 +20,8 @@ class AbstractHttpCommand(AbstractCommand):
 
     @abstractmethod
     def get_description(self) -> str:
+        pass
+
+    @abstractmethod
+    def execute_http_command(self, request: AbstractHttpMethod) -> AbstractOutput:
         pass
