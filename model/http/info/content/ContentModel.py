@@ -2,10 +2,10 @@ from abc import ABC
 from http import HTTPStatus
 from typing import Iterable, TypeVar
 
-from model.http.info.EndpointModel import AbstractEndpoint
+from model.http.info.endpoint.EndpointModel import AbstractEndpoint
 from model.http.info.body.BodyModel import AbstractBody
-from model.http.info.HeaderModel import Headers
-from model.http.info.ParameterModel import Parameters
+from model.http.info.header.HeaderModel import Headers
+from model.http.info.parameter.ParameterModel import Parameters
 
 # TODO: ADD TESTS
 _SENTINEL = object()

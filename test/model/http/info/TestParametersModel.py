@@ -1,9 +1,6 @@
 from typing import Set
 
-import pytest
-
-
-from model.http.info.ParameterModel import Parameters, Parameter, AbstractParameter
+from model.http.info.parameter.ParameterModel import Parameters, Parameter, AbstractParameter
 
 
 def test_should_have_duplicate_parameters() -> None:

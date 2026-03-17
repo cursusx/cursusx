@@ -3,9 +3,9 @@ from http import HTTPStatus
 from model.builder.BuilderModel import AbstractBuilder
 from model.http.info.body.BodyModel import AbstractBody
 from model.http.info.content.ContentModel import AbstractContent
-from model.http.info.EndpointModel import AbstractEndpoint
-from model.http.info.HeaderModel import Headers
-from model.http.info.ParameterModel import Parameters
+from model.http.info.endpoint.EndpointModel import AbstractEndpoint
+from model.http.info.header.HeaderModel import Headers
+from model.http.info.parameter.ParameterModel import Parameters
 
 _SENTINEL = object()
 

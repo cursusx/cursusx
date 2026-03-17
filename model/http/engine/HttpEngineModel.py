@@ -1,8 +1,8 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from http import HTTPMethod
 
 from model.http.engine.EngineModel import AbstractEngine
-from model.http.info.MethodModel import AbstractHttpMethod
+from model.http.info.data.MethodModel import AbstractHttpData
 from model.http.info.content.ResponseModel import ResponseContent
 
 
@@ -18,10 +18,10 @@ class AbstractHttpEngine(AbstractEngine[ResponseContent]):
     def get_engine_name(self) -> str:
         return self._my_engine_name
 
-    def analyze(self, request: AbstractHttpMethod) -> ResponseContent:
+    def analyze(self, request: AbstractHttpData) -> ResponseContent:
         return self.do_query(request)
 
-    def do_query(self, http_request: AbstractHttpMethod) -> ResponseContent:
+    def do_query(self, http_request: AbstractHttpData) -> ResponseContent:
         match http_request.get_http_method():
             case HTTPMethod.GET:
                 return self._do_get(http_request)
@@ -38,21 +38,21 @@ class AbstractHttpEngine(AbstractEngine[ResponseContent]):
                     f"The input http method: {not_supported} is not supported.")
 
     @abstractmethod
-    def _do_get(self, http_request: AbstractHttpMethod) -> ResponseContent:
+    def _do_get(self, http_request: AbstractHttpData) -> ResponseContent:
         pass
 
     @abstractmethod
-    def _do_post(self, http_request: AbstractHttpMethod) -> ResponseContent:
+    def _do_post(self, http_request: AbstractHttpData) -> ResponseContent:
         pass
 
     @abstractmethod
-    def _do_put(self, http_request: AbstractHttpMethod) -> ResponseContent:
+    def _do_put(self, http_request: AbstractHttpData) -> ResponseContent:
         pass
 
     @abstractmethod
-    def _do_delete(self, http_request: AbstractHttpMethod) -> ResponseContent:
+    def _do_delete(self, http_request: AbstractHttpData) -> ResponseContent:
         pass
 
     @abstractmethod
-    def _do_patch(self, http_request: AbstractHttpMethod) -> ResponseContent:
+    def _do_patch(self, http_request: AbstractHttpData) -> ResponseContent:
         pass
