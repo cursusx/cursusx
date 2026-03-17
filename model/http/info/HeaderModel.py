@@ -1,6 +1,8 @@
 from abc import ABC
 from collections.abc import Collection
-from typing import Set, Mapping
+from typing import Set, Mapping, Iterable
+
+from model.http.info.ContentModel import IterableContent
 
 _SENTINEL = object()
 
@@ -81,7 +83,7 @@ class Header(AbstractHeader):
         return cls(_sentinel=_SENTINEL, my_header_name=value[0], my_header_value=value[1])
 
 
-class Headers:
+class Headers(IterableContent[Mapping[str, str]]):
     """
     This class represents a collection of headers.
     """
@@ -98,6 +100,9 @@ class Headers:
 
     def get_headers(self) -> Set[AbstractHeader]:
         return self._my_headers
+
+    def dump(self) -> Mapping[str, str]:
+        return {header.get_header_name(): header.get_header_value() for header in self._my_headers}
 
     @classmethod
     def from_list(cls, headers: Collection[AbstractHeader]) -> 'Headers':
