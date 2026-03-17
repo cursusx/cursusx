@@ -1,5 +1,5 @@
 from abc import ABC
-from typing import Collection
+from typing import Collection, Iterable
 
 from model.http.info.BodyModel import AbstractBody
 
@@ -51,6 +51,13 @@ class Parameters:
             raise TypeError(
                 'In order to create this class, use the factory method.')
         self._my_parameters = my_parameters
+
+    def dump(self) -> Iterable[tuple[str, str]]:
+        """
+        This method returns all the parameters of the class.
+        :return: see above
+        """
+        return [(parameter.get_key(), parameter.get_value()) for parameter in self._my_parameters]
 
     @classmethod
     def from_list(cls, parameters: Collection[Parameter]) -> 'Parameters':
