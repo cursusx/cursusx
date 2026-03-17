@@ -1,9 +1,9 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 from http import HTTPStatus
-from typing import Iterable, TypeVar, Generic
+from typing import Iterable, TypeVar
 
 from model.http.info.EndpointModel import AbstractEndpoint
-from model.http.info.BodyModel import AbstractBody
+from model.http.info.body.BodyModel import AbstractBody
 from model.http.info.HeaderModel import Headers
 from model.http.info.ParameterModel import Parameters
 

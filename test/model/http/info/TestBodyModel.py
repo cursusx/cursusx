@@ -1,8 +1,6 @@
 from typing import Any
 
-import pytest
-
-from model.http.info.BodyModel import AbstractBody, Body
+from model.http.info.body.BodyModel import AbstractBody, Body
 
 
 def test_should_be_possible_to_create_empty_body():
