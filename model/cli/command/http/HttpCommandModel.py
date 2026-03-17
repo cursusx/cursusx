@@ -3,6 +3,7 @@ from abc import abstractmethod
 from model.cli.command.CommandModel import AbstractCommand
 from model.cli.command.FlagModel import AbstractFlag
 from model.cli.command.OutputModel import AbstractOutput
+from model.cli.command.http.Contants import HTTP_COMMAND_NAME
 from model.cli.command.http.HttpOutputModel import HttpOutput
 from model.http.engine.HttpEngineModel import AbstractHttpEngine
 from model.http.info.data.DataModel import AbstractHttpData
@@ -22,7 +23,7 @@ class AbstractHttpCommand(AbstractCommand):
 
 
 class HttpCommand(AbstractHttpCommand):
-    _http_command_name: str = "http"
+    _http_command_name: str = HTTP_COMMAND_NAME
 
     def __init__(self, http_engine: AbstractHttpEngine, flags: set[AbstractFlag]):
         super().__init__(http_engine, self._http_command_name, flags)
