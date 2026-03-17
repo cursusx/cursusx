@@ -11,7 +11,6 @@ from model.http.info.content.ResponseModel import ResponseContent
 
 class AbstractHttpCommand(AbstractCommand):
     _my_http_engine: AbstractHttpEngine
-    # TODO: Create a request builder that is shared among some of the flags
 
     def __init__(self, http_engine: AbstractHttpEngine, command_name: str, flags: set[AbstractFlag]):
         super().__init__(command_name, flags)

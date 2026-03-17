@@ -4,9 +4,9 @@ from typing import Generic, NoReturn
 
 from typing_extensions import TypeVar
 
-from model.cli.command.QueryBuilderModel import AbstractQueryBuilder
+from model.builder.BuilderModel import AbstractBuilder
 
-_T = TypeVar("_T", bound=AbstractQueryBuilder)
+_T = TypeVar("_T", bound=AbstractBuilder)
 
 # TODO: at each command, create a new query builder and pass it to each flag value
 
