@@ -10,6 +10,7 @@ from model.http.info.MethodModel import AbstractHttpMethod
 
 class AbstractHttpCommand(AbstractCommand):
     _my_http_engine: AbstractHttpEngine
+    # TODO: Create a request builder that is shared among some of the flags
 
     def __init__(self, http_engine: AbstractHttpEngine, command_name: str, flags: set[AbstractFlag]):
         super().__init__(command_name, flags)
@@ -21,8 +22,10 @@ class AbstractHttpCommand(AbstractCommand):
 
 
 class HttpCommand(AbstractHttpCommand):
-    def __init__(self, http_engine: AbstractHttpEngine, command_name: str, flags: set[AbstractFlag]):
-        super().__init__(http_engine, command_name, flags)
+    _http_command_name: str = "http"
+
+    def __init__(self, http_engine: AbstractHttpEngine, flags: set[AbstractFlag]):
+        super().__init__(http_engine, self._http_command_name, flags)
 
     def get_description(self) -> str:
         return f"Command name: {self._my_command_name}. \n" + super().get_description()
