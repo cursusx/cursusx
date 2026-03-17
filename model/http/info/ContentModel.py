@@ -30,31 +30,35 @@ class AbstractContent(ABC):
 
     def get_endpoint(self) -> AbstractEndpoint:
         """
-        This http returns the endpoint
+        This method returns the endpoint.
         :return:
         """
         return self._my_endpoint
 
     def get_status_code(self) -> HTTPStatus:
         """
-        This http returns the current http status code.
+        This method returns the current http status code.
         :return: see above
         """
         return self._my_status_code
 
     def get_headers(self) -> Headers:
         """
-        This http returns the collection of headers.
+        This method returns the collection of headers.
         :return: see above
         """
         return self._my_headers
 
     def get_parameters(self) -> Parameters:
+        """
+        This method returns all the parameters.
+        :return:
+        """
         return self._my_parameters
 
     def get_body(self) -> AbstractBody:
         """
-        This http returns the body of the http http.
+        This method returns the body.
         :return: see above
         """
         return self._my_body
