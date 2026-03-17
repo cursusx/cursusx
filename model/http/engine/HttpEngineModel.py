@@ -6,7 +6,7 @@ from model.http.info.ContentModel import ResponseContent
 from model.http.info.MethodModel import AbstractHttpMethod
 
 
-class AbstractHttpEngine(AbstractEngine):
+class AbstractHttpEngine(AbstractEngine[ResponseContent]):
     """
     This is the engine for making all the http requests
     """

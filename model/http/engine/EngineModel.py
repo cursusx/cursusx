@@ -1,12 +1,12 @@
 from abc import ABC, abstractmethod
-from typing import Generic, TypeVar
+from typing import TypeVar, Generic
 
 from model.http.info.MethodModel import AbstractHttpMethod
 
-_B: TypeVar = TypeVar("_B")
+_B = TypeVar("_B")
 
 
-class AbstractEngine(ABC):
+class AbstractEngine(ABC, Generic[_B]):
     @abstractmethod
-    def analyze[_B](self, request: AbstractHttpMethod) -> _B:
+    def analyze(self, request: AbstractHttpMethod) -> _B:
         pass
