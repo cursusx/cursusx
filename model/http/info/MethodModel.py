@@ -1,7 +1,7 @@
 from abc import ABC
 from http import HTTPMethod
 
-from model.http.info.ContentModel import RequestContent
+from model.http.info.impl.RequestModel import RequestContent
 
 
 # TODO: add tests
@@ -20,3 +20,8 @@ class AbstractHttpMethod(ABC):
 
     def get_http_method(self) -> HTTPMethod:
         return self._my_http_method
+
+
+class HttpMethod(AbstractHttpMethod):
+    def __init__(self, method: HTTPMethod, request: RequestContent):
+        super().__init__(method, request)

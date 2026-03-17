@@ -5,8 +5,8 @@ from model.cli.command.FlagModel import AbstractFlag
 from model.cli.command.OutputModel import AbstractOutput
 from model.cli.command.http.HttpOutputModel import HttpOutput
 from model.http.engine.HttpEngineModel import AbstractHttpEngine
-from model.http.info.ContentModel import ResponseContent
 from model.http.info.MethodModel import AbstractHttpMethod
+from model.http.info.impl.ResponseModel import ResponseContent
 
 
 class AbstractHttpCommand(AbstractCommand):

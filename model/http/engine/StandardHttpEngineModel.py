@@ -5,10 +5,10 @@ from requests import Response
 
 from model.http.engine.HttpEngineModel import AbstractHttpEngine
 from model.http.info.BodyModel import Body
-from model.http.info.ContentModel import ResponseContent
 from model.http.info.HeaderModel import Headers
 from model.http.info.MethodModel import AbstractHttpMethod
 from model.http.info.ParameterModel import Parameters
+from model.http.info.impl.ResponseModel import ResponseContent
 
 
 class StandardHttpEngine(AbstractHttpEngine):
