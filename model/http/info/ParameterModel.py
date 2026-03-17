@@ -30,8 +30,17 @@ class AbstractParameter(ABC):
 
 
 class Parameter(AbstractParameter):
-    def __init__(self, key: str, value: str):
+    def __init__(self, _sentinel: object = None, *, key: str, value: str):
+        if _sentinel is None:
+            raise TypeError(
+                "In order to create this class, use the factory method.")
         super().__init__(key, value)
+
+    @classmethod
+    def from_key_value(cls, key: str = '', value: str = '') -> 'Parameter':
+        if key == '' or value == '':
+            raise TypeError("The key and the value cannot be empty.")
+        return cls(_sentinel=_SENTINEL, key=key, value=value)
 
 
 class Parameters:
@@ -49,4 +58,4 @@ class Parameters:
 
     @classmethod
     def from_tuples(cls, parameters: Collection[tuple[str, str]]) -> 'Parameters':
-        return cls(_sentinel=_SENTINEL, my_parameters={Parameter(param[0], param[1]) for param in parameters})
+        return cls(_sentinel=_SENTINEL, my_parameters={Parameter.from_key_value(param[0], param[1]) for param in parameters})
