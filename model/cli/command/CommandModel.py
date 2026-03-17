@@ -19,9 +19,5 @@ class AbstractHttpCommand(AbstractCommand):
     _my_http_engine: AbstractHttpEngine
 
     @abstractmethod
-    def get_description(self) -> str:
-        pass
-
-    @abstractmethod
     def execute_http_command(self, request: AbstractHttpMethod) -> AbstractOutput:
         pass
