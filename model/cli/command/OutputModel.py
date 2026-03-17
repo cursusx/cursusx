@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 
 from typing_extensions import TypeVar, Generic
 
-from model.http.info.ContentModel import ResponseContent
 
 _T = TypeVar("_T")
 _O = TypeVar("_O")
