@@ -4,10 +4,9 @@ from typing_extensions import TypeVar, Generic
 
 
 _T = TypeVar("_T")
-_O = TypeVar("_O")
 
 
-class AbstractOutput(ABC, Generic[_T, _O]):
+class AbstractOutput(ABC, Generic[_T]):
     """
     Wrapper for the output.
     """
@@ -17,7 +16,7 @@ class AbstractOutput(ABC, Generic[_T, _O]):
         self._my_output = output
 
     @abstractmethod
-    def wrap_output(self) -> _O:
+    def wrap_output(self) -> str:
         """
         Return a string representation of the command output.
         :return: see above.
