@@ -2,6 +2,7 @@ from abc import ABC
 from typing import Collection, Iterable
 
 from model.http.info.BodyModel import AbstractBody
+from model.http.info.ContentModel import IterableContent
 
 _SENTINEL = object()
 
@@ -43,7 +44,7 @@ class Parameter(AbstractParameter):
         return cls(_sentinel=_SENTINEL, key=key, value=value)
 
 
-class Parameters:
+class Parameters(IterableContent[Iterable[tuple[str, str]]]):
     _my_parameters: set[Parameter]
 
     def __init__(self, _sentinel: object = None, *, my_parameters: set[Parameter]):
