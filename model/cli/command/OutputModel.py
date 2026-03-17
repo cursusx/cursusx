@@ -19,4 +19,8 @@ class AbstractOutput(ABC, Generic[_T, _O]):
 
     @abstractmethod
     def wrap_output(self) -> _O:
+        """
+        Return a string representation of the command output.
+        :return: see above.
+        """
         pass
