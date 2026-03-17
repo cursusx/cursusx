@@ -12,11 +12,19 @@ class AbstractOutput(ABC, Generic[_T, _O]):
     """
     Wrapper for the output.
     """
+    _my_output: _T
+
+    def __init__(self, output: _T):
+        self._my_output = output
+
     @abstractmethod
-    def wrap_output(self, output: _T) -> _O:
+    def wrap_output(self) -> _O:
         pass
 
 
 class HttpOutput(AbstractOutput[ResponseContent, str]):
-    def wrap_output(self, output: ResponseContent) -> str:
+    def __init__(self, output: ResponseContent):
+        super().__init__(output)
+
+    def wrap_output(self) -> str:
         return ""
