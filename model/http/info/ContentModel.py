@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from http import HTTPStatus
-from typing import Iterable
+from typing import Iterable, TypeVar, Collection, Generic
 
 from model.http.info.EndpointModel import AbstractEndpoint
 from model.http.info.BodyModel import AbstractBody
@@ -10,10 +10,12 @@ from model.http.info.ParameterModel import Parameters
 # TODO: ADD TESTS
 _SENTINEL = object()
 
+_T = TypeVar('_T', bound=Iterable)
 
-class IterableContent(ABC):
+
+class IterableContent(ABC, Generic[_T]):
     @abstractmethod
-    def dump(self) -> Iterable[tuple[str, str]]:
+    def dump(self) -> _T:
         pass
 
 
