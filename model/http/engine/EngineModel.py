@@ -14,6 +14,9 @@ class AbstractEngine(ABC):
     def __init__(self, my_engine_name: str):
         self._my_engine_name = my_engine_name
 
+    def get_engine_name(self) -> str:
+        return self._my_engine_name
+
     def do_query(self, http_request: AbstractHttpMethod) -> ResponseContent:
         match http_request.get_http_method():
             case HTTPMethod.GET:
