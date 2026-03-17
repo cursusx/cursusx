@@ -1,7 +1,7 @@
 from abc import ABC
 from typing import Collection, Iterable, Set
 
-from model.http.info.ContentModel import IterableContent
+from model.http.info.IterableContentModel import IterableContent
 
 _SENTINEL = object()
 

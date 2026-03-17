@@ -2,7 +2,7 @@ from abc import ABC
 from collections.abc import Collection
 from typing import Set, Mapping
 
-from model.http.info.ContentModel import IterableContent
+from model.http.info.IterableContentModel import IterableContent
 
 _SENTINEL = object()
 

@@ -13,12 +13,6 @@ _SENTINEL = object()
 _T = TypeVar('_T', bound=Iterable)
 
 
-class IterableContent(ABC, Generic[_T]):
-    @abstractmethod
-    def dump(self) -> _T:
-        pass
-
-
 class AbstractContent(ABC):
     """
     This class represents an http content.
