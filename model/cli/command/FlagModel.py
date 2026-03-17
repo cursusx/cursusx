@@ -17,3 +17,10 @@ class AbstractFlag(ABC):
     def __init__(self, my_name: str, my_logic: AbstractFlagLogic):
         self._my_name = my_name
         self._my_logic = my_logic
+
+    @abstractmethod
+    def get_flag_descritpion(self) -> str:
+        pass
+
+    def __repr__(self) -> str:
+        return f"{self._my_name}: {self.get_flag_descritpion()}"
