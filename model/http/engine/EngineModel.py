@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import TypeVar, Generic
 
-from model.http.info.data.MethodModel import AbstractHttpData
+from model.http.info.data.DataModel import AbstractHttpData
 
 _B = TypeVar("_B")
 

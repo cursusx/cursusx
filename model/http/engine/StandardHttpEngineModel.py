@@ -6,7 +6,7 @@ from requests import Response
 from model.http.engine.HttpEngineModel import AbstractHttpEngine
 from model.http.info.body.BodyModel import Body
 from model.http.info.header.HeaderModel import Headers
-from model.http.info.data.MethodModel import AbstractHttpData
+from model.http.info.data.DataModel import AbstractHttpData
 from model.http.info.parameter.ParameterModel import Parameters
 from model.http.info.content.ResponseModel import ResponseContent
 

@@ -2,7 +2,7 @@ from abc import abstractmethod
 from http import HTTPMethod
 
 from model.http.engine.EngineModel import AbstractEngine
-from model.http.info.data.MethodModel import AbstractHttpData
+from model.http.info.data.DataModel import AbstractHttpData
 from model.http.info.content.ResponseModel import ResponseContent
 
 

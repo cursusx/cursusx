@@ -29,7 +29,7 @@ class HttpData(AbstractHttpData):
         super().__init__(method, request)
 
     @classmethod
-    def create_endpoint(cls, method: HTTPMethod, request: RequestContent):
+    def create_data(cls, method: HTTPMethod, request: RequestContent):
         if method is None or request is None:
             raise ValueError("The input parameters cannot be None.")
         return cls(_sentinel=_SENTINEL, method=method, request=request)
