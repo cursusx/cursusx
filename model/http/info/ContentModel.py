@@ -1,5 +1,6 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 from http import HTTPStatus
+from typing import Iterable
 
 from model.http.info.EndpointModel import AbstractEndpoint
 from model.http.info.BodyModel import AbstractBody
@@ -8,6 +9,12 @@ from model.http.info.ParameterModel import Parameters
 
 # TODO: ADD TESTS
 _SENTINEL = object()
+
+
+class IterableContent(ABC):
+    @abstractmethod
+    def dump(self) -> Iterable[tuple[str, str]]:
+        pass
 
 
 class AbstractContent(ABC):
