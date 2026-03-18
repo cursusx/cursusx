@@ -9,7 +9,6 @@ from model.http.info.data.DataModel import HttpDataBuilder
 # cursurx http -method=get
 
 
-# TODO: HTTP DATA BUILDER INSTEAD OF REQUEST CONTENT
 class HttpMethodFlagValue(AbstractFlagValue[HttpDataBuilder]):
     _my_query_builder: HttpDataBuilder
     _my_supported_values: set[str] = {
