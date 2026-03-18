@@ -15,10 +15,10 @@ class AbstractFlagFactory(ABC):
     _my_flags: dict[str, tuple[type[AbstractFlag], type[AbstractFlagValue]]]
 
     def create_flag(self, flag_name: str, builder: AbstractBuilder) -> AbstractFlag:
-        if flag_name not in AbstractFlagFactory._my_flags:
+        if flag_name not in self._my_flags:
             raise KeyError(
                 f"{flag_name} not exist, specify the correct flagf name.")
-        return create_flag(flag_class=AbstractFlagFactory._my_flags[flag_name][0],
-                           flag_value=AbstractFlagFactory._my_flags[flag_name][1],
+        return create_flag(flag_class=self._my_flags[flag_name][0],
+                           flag_value=self._my_flags[flag_name][1],
                            flag_name=flag_name,
                            builder=builder)
