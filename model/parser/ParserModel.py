@@ -12,6 +12,11 @@ class AbstractParser(ABC):
     def parse_command(self, input_command: str = '') -> AbstractCommand:
         pass
 
+    def execute_command(self, command: str) -> str:
+        return (self.parse_command(command)
+                .execute_command(command)
+                .wrap_output())
+
 
 class Parser(AbstractParser):
     def parse_command(self, input_command: str = '') -> AbstractCommand:

@@ -24,9 +24,8 @@ class AbstractContent(ABC):
     _my_parameters: Parameters
     _my_body: AbstractBody
 
-    def __init__(self, endpoint: AbstractEndpoint, status_code: HTTPStatus, headers: Headers, parameters: Parameters, body: AbstractBody) -> None:
+    def __init__(self, endpoint: AbstractEndpoint, headers: Headers, parameters: Parameters, body: AbstractBody):
         self._my_endpoint = endpoint
-        self._my_status_code = status_code
         self._my_headers = headers
         self._my_parameters = parameters
         self._my_body = body

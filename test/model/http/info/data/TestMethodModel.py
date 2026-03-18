@@ -17,7 +17,6 @@ def test_should_be_possible_to_retrieve_data_attributes():
             Header.from_tuple(('key', 'value'))
         ]))
         .add_parameters(Parameters.from_list([Parameter.from_key_value('key', 'value')]))
-        .add_status_code(HTTPStatus.OK)
         .add_endpoint(BasicEndpoint.create_endpoint('localhost', 80))
         .build()
     )

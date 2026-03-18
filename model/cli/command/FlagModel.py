@@ -28,10 +28,16 @@ class AbstractFlagValue(ABC, Generic[_T]):
         :param flag_value: input string that represent the flag value
         :return: see above
         """
+        # TODO: Here then extract the value
         return self._my_representation.match(flag_value) is not None
 
     @abstractmethod
-    def match_value(self, flag_value: str) -> None:
+    def match_value(self) -> None:
+        """
+        This method takes from the internal flag value the flag value specified by the user and does something
+        with the internal builder.
+        :return: see above.
+        """
         pass
 
 
@@ -50,6 +56,9 @@ class AbstractFlag(ABC, Generic[_T]):
     @abstractmethod
     def get_flag_descritpion(self) -> str:
         pass
+
+    def get_flag_value(self) -> AbstractFlagValue[_T]:
+        return self._my_flag_value
 
     def __repr__(self) -> str:
         return f"{self._my_name}: {self.get_flag_descritpion()}"

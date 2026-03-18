@@ -1,7 +1,12 @@
 from abc import ABC
 from http import HTTPMethod
 
+from model.builder.BuilderModel import AbstractBuilder
+from model.http.info.body.BodyModel import AbstractBody
 from model.http.info.content.RequestModel import RequestContent
+from model.http.info.endpoint.EndpointModel import AbstractEndpoint
+from model.http.info.header.HeaderModel import Headers
+from model.http.info.parameter.ParameterModel import Parameters
 
 _SENTINEL = object()
 
@@ -33,3 +38,40 @@ class HttpData(AbstractHttpData):
         if method is None or request is None:
             raise ValueError("The input parameters cannot be None.")
         return cls(_sentinel=_SENTINEL, method=method, request=request)
+
+
+class HttpDataBuilder(AbstractBuilder[HttpData]):
+    _my_endpoint: AbstractEndpoint
+    _my_headers: Headers
+    _my_parameters: Parameters
+    _my_body: AbstractBody
+    _my_http_method: HTTPMethod
+
+    def add_http_method(self, method: HTTPMethod) -> 'HttpDataBuilder':
+        self._my_http_method = method
+        return self
+
+    def add_endpoint(self, endpoint: AbstractEndpoint) -> 'HttpDataBuilder':
+        self._my_endpoint = endpoint
+        return self
+
+    def add_headers(self, headers: Headers) -> 'HttpDataBuilder':
+        self._my_headers = headers
+        return self
+
+    def add_parameters(self, parameters: Parameters) -> 'HttpDataBuilder':
+        self._my_parameters = parameters
+        return self
+
+    def add_body(self, body: AbstractBody) -> 'HttpDataBuilder':
+        self._my_body = body
+        return self
+
+    def build(self) -> HttpData:
+        if self._my_http_method and self._my_headers and self._my_parameters and self._my_body and self._my_endpoint:
+            return HttpData.create_data(self._my_http_method, RequestContent.create_request(endpoint=self._my_endpoint,
+                                                                                            headers=self._my_headers,
+                                                                                            parameters=self._my_parameters,
+                                                                                            body=self._my_body))
+        raise TypeError(
+            "In order to create a HttpData class you have to specify all the parameters")

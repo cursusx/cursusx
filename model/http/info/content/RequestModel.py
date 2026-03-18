@@ -1,4 +1,3 @@
-from http import HTTPStatus
 
 from model.builder.BuilderModel import AbstractBuilder
 from model.http.info.body.BodyModel import AbstractBody
@@ -15,30 +14,25 @@ class RequestContent(AbstractContent):
     This class represents a http Request.
     """
 
-    def __init__(self, _sentinel: object = None, *, endpoint: AbstractEndpoint, status_code: HTTPStatus, headers: Headers, parameters: Parameters, body: AbstractBody) -> None:
+    def __init__(self, _sentinel: object = None, *, endpoint: AbstractEndpoint, headers: Headers, parameters: Parameters, body: AbstractBody):
         if _sentinel is None:
             raise TypeError(
                 "In order to create a Request you have to use the factory http.")
-        super().__init__(endpoint, status_code, headers, parameters, body)
+        super().__init__(endpoint, headers, parameters, body)
 
     @classmethod
-    def create_request(cls, endpoint: AbstractEndpoint, status_code: HTTPStatus, headers: Headers, parameters: Parameters, body: AbstractBody) -> 'RequestContent':
-        return cls(_sentinel=_SENTINEL, endpoint=endpoint, status_code=status_code, headers=headers, parameters=parameters, body=body)
+    def create_request(cls, endpoint: AbstractEndpoint, headers: Headers, parameters: Parameters, body: AbstractBody) -> 'RequestContent':
+        return cls(_sentinel=_SENTINEL, endpoint=endpoint, headers=headers, parameters=parameters, body=body)
 
 
 class RequestContentBuilder(AbstractBuilder[RequestContent]):
     _my_endpoint: AbstractEndpoint
-    _my_status_code: HTTPStatus
     _my_headers: Headers
     _my_parameters: Parameters
     _my_body: AbstractBody
 
     def add_endpoint(self, endpoint: AbstractEndpoint) -> 'RequestContentBuilder':
         self._my_endpoint = endpoint
-        return self
-
-    def add_status_code(self, status_code: HTTPStatus) -> 'RequestContentBuilder':
-        self._my_status_code = status_code
         return self
 
     def add_headers(self, headers: Headers) -> 'RequestContentBuilder':
@@ -54,9 +48,8 @@ class RequestContentBuilder(AbstractBuilder[RequestContent]):
         return self
 
     def build(self) -> RequestContent:
-        if self._my_endpoint and self._my_status_code and self._my_headers and self._my_parameters and self._my_body:
+        if self._my_endpoint and self._my_headers and self._my_parameters and self._my_body:
             return RequestContent.create_request(endpoint=self._my_endpoint,
-                                                 status_code=self._my_status_code,
                                                  headers=self._my_headers,
                                                  parameters=self._my_parameters,
                                                  body=self._my_body)

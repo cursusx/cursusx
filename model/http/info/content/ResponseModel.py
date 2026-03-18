@@ -13,12 +13,17 @@ class ResponseContent(AbstractContent):
     """
     This class represents a http Response.
     """
+    _my_status: HTTPStatus
 
     def __init__(self, _sentinel: object = None, *, endpoint: AbstractEndpoint, status_code: HTTPStatus, headers: Headers, parameters: Parameters, body: AbstractBody) -> None:
         if _sentinel is _SENTINEL:
             raise TypeError(
                 "In order to create a Response you have to use the factory http.")
-        super().__init__(endpoint, status_code, headers, parameters, body)
+        super().__init__(endpoint, headers, parameters, body)
+        self._my_status_code = status_code
+
+    def get_status_code(self) -> HTTPStatus:
+        return self._my_status_code
 
     @classmethod
     def create_response(cls, endpoint: AbstractEndpoint, status_code: HTTPStatus, headers: Headers, parameters: Parameters, body: AbstractBody) -> 'ResponseContent':
