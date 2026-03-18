@@ -3,7 +3,8 @@ from typing import TypeVar, Generic
 
 
 from model.builder.BuilderModel import AbstractBuilder
-from model.cli.command.FlagModel import AbstractFlag, FlagFactory
+from model.cli.command.FlagFactory import FlagFactory
+from model.cli.command.FlagModel import AbstractFlag
 
 _I = TypeVar("_I")
 _T = TypeVar("_T")
