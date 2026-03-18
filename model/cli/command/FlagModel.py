@@ -78,11 +78,12 @@ class FlagFactory:
         HTTP_FLAG_METHOD: (HttpMethodFlag, HttpMethodFlagValue),
     }
 
-    def create_flag(self, flag_name: str, builder: AbstractBuilder) -> AbstractFlag[_T]:
-        if flag_name not in self._my_flags:
+    @staticmethod
+    def create_flag(flag_name: str, builder: AbstractBuilder) -> AbstractFlag[_T]:
+        if flag_name not in FlagFactory._my_flags:
             raise KeyError(
                 f"{flag_name} not exist, specify the correct flagf name.")
-        return _create_flag(flag_class=self._my_flags[flag_name][0],
-                            flag_value=self._my_flags[flag_name][1],
+        return _create_flag(flag_class=FlagFactory._my_flags[flag_name][0],
+                            flag_value=FlagFactory._my_flags[flag_name][1],
                             flag_name=flag_name,
                             builder=builder)
