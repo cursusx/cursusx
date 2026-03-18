@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 from typing import TypeVar, Generic
 
+
 from model.builder.BuilderModel import AbstractBuilder
-from model.cli.command.FlagModel import AbstractFlag
-from model.cli.command.http.Contants import HTTP_FLAG_METHOD
+from model.cli.command.FlagModel import AbstractFlag, FlagFactory
 
 _I = TypeVar("_I")
 _T = TypeVar("_T")
@@ -25,13 +25,11 @@ class StringCommandFlagStrategy(AbstractExtractCommandFlagStrategy[str, _T]):
         super().__init__(my_query_data_builder)
 
     def extract_flag_representation(self, input_command: str, ) -> set[AbstractFlag]:
-        # TODO: for each flag, match it and store the value in the flag value.
         array_of_flags: list[str] = input_command.split()[1:]
         all_flags: set[AbstractFlag] = set()
         for single_flag in array_of_flags:
             # a flag is of the type: -flag_name?(=value)
             flag_name: str = single_flag.split('-')[1]
-            # TODO: create a factory for all the flags
-            if flag_name == HTTP_FLAG_METHOD:
-                print(1)
-        return set()
+            all_flags.add(FlagFactory.create_flag(
+                flag_name, self._my_query_data_builder))
+        return all_flags
