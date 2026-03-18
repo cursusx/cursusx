@@ -78,6 +78,9 @@ class FlagFactory:
         HTTP_FLAG_METHOD: (HttpMethodFlag, HttpMethodFlagValue),
     }
 
+    def __init__(self):
+        raise ValueError('You can not use this constructor.')
+
     @staticmethod
     def create_flag(flag_name: str, builder: AbstractBuilder) -> AbstractFlag[_T]:
         if flag_name not in FlagFactory._my_flags:
