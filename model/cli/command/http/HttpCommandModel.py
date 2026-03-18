@@ -15,7 +15,7 @@ class AbstractHttpCommand(AbstractCommand):
     _my_http_engine: AbstractHttpEngine
 
     def __init__(self, http_engine: AbstractHttpEngine, command_name: str):
-        super().__init__(command_name, StringCommandFlagStrategy())
+        super().__init__(command_name, StringCommandFlagStrategy(HttpDataBuilder()))
         self._my_http_engine = http_engine
         self._my_http_command_name = command_name
 
@@ -28,7 +28,6 @@ class HttpCommand(AbstractHttpCommand):
     _my_http_data_builder: HttpDataBuilder
 
     def __init__(self, http_engine: AbstractHttpEngine):
-        self._my_http_data_builder = HttpDataBuilder()
         super().__init__(http_engine,
                          HTTP_COMMAND_NAME)
 

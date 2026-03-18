@@ -22,7 +22,7 @@ class Parser(AbstractParser):
     def _parse_command(self, input_command: str = '') -> AbstractCommand:
         if input_command == '':
             raise ValueError('Input command is empty!')
-        command_and_flags: list[str] = input_command.split(' ')[1:]
+        command_and_flags: list[str] = input_command.split(' ')
         command_name = command_and_flags[0]
 
         if command_name == HTTP_COMMAND_NAME:
