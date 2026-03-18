@@ -6,6 +6,7 @@ from model.cli.command.FlagModel import AbstractFlag
 from model.cli.command.OutputModel import AbstractOutput
 from model.cli.command.http.Contants import HTTP_COMMAND_NAME
 from model.cli.command.http.HttpOutputModel import HttpOutput
+from model.cli.command.http.flags.HttpFlagsFactory import HttpFlagFactory
 from model.http.engine.HttpEngineModel import AbstractHttpEngine
 from model.http.info.data.DataModel import AbstractHttpData, HttpDataBuilder
 from model.http.info.content.ResponseModel import ResponseContent
@@ -15,7 +16,8 @@ class AbstractHttpCommand(AbstractCommand):
     _my_http_engine: AbstractHttpEngine
 
     def __init__(self, http_engine: AbstractHttpEngine, command_name: str):
-        super().__init__(command_name, StringCommandFlagStrategy(HttpDataBuilder()))
+        super().__init__(command_name, StringCommandFlagStrategy(
+            HttpDataBuilder(), HttpFlagFactory()))
         self._my_http_engine = http_engine
         self._my_http_command_name = command_name
 
