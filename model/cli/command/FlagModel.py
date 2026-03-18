@@ -5,8 +5,6 @@ from typing import Generic, NoReturn
 from typing_extensions import TypeVar
 
 from model.builder.BuilderModel import AbstractBuilder
-from model.cli.command.http.Contants import HTTP_FLAG_METHOD
-from model.cli.command.http.flags.HttpMethodFlagModel import HttpMethodFlag, HttpMethodFlagValue
 
 _T = TypeVar("_T", bound=AbstractBuilder)
 
