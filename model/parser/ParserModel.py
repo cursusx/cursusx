@@ -9,17 +9,17 @@ from model.http.engine.StandardHttpEngineModel import STANDARD_ENGINE_NAME
 
 class AbstractParser(ABC):
     @abstractmethod
-    def parse_command(self, input_command: str = '') -> AbstractCommand:
+    def _parse_command(self, input_command: str = '') -> AbstractCommand:
         pass
 
     def execute_command(self, command: str) -> str:
-        return (self.parse_command(command)
+        return (self._parse_command(command)
                 .execute_command(command)
                 .wrap_output())
 
 
 class Parser(AbstractParser):
-    def parse_command(self, input_command: str = '') -> AbstractCommand:
+    def _parse_command(self, input_command: str = '') -> AbstractCommand:
         if input_command == '':
             raise ValueError('Input command is empty!')
         command_and_flags: list[str] = input_command.split(' ')[1:]
