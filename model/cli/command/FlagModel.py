@@ -5,6 +5,8 @@ from typing import Generic, NoReturn
 from typing_extensions import TypeVar
 
 from model.builder.BuilderModel import AbstractBuilder
+from model.cli.command.http.Contants import HTTP_FLAG_METHOD
+from model.cli.command.http.flags.HttpMethodFlagModel import HttpMethodFlag, HttpMethodFlagValue
 
 _T = TypeVar("_T", bound=AbstractBuilder)
 
@@ -62,3 +64,25 @@ class AbstractFlag(ABC, Generic[_T]):
 
     def __repr__(self) -> str:
         return f"{self._my_name}: {self.get_flag_descritpion()}"
+
+
+def _create_flag(flag_class: type[AbstractFlag],
+                 flag_value: type[AbstractFlagValue],
+                 flag_name: str,
+                 builder: AbstractBuilder) -> AbstractFlag:
+    return flag_class(my_name=flag_name, my_flag_value=flag_value(my_query_builder=builder))
+
+
+class FlagFactory:
+    _my_flags: dict[str, tuple[type[AbstractFlag], type[AbstractFlagValue]]] = {
+        HTTP_FLAG_METHOD: (HttpMethodFlag, HttpMethodFlagValue),
+    }
+
+    def create_flag(self, flag_name: str, builder: AbstractBuilder) -> AbstractFlag[_T]:
+        if flag_name not in self._my_flags:
+            raise KeyError(
+                f"{flag_name} not exist, specify the correct flagf name.")
+        return _create_flag(flag_class=self._my_flags[flag_name][0],
+                            flag_value=self._my_flags[flag_name][1],
+                            flag_name=flag_name,
+                            builder=builder)
