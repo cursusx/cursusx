@@ -6,7 +6,6 @@ from model.cli.command.FlagModel import AbstractFlag
 from model.cli.command.OutputModel import AbstractOutput
 from model.cli.command.http.Contants import HTTP_COMMAND_NAME
 from model.cli.command.http.HttpOutputModel import HttpOutput
-from model.cli.command.http.flags.HttpFlags import get_all_http_method_flags
 from model.http.engine.HttpEngineModel import AbstractHttpEngine
 from model.http.info.data.DataModel import AbstractHttpData, HttpDataBuilder
 from model.http.info.content.ResponseModel import ResponseContent
@@ -15,8 +14,8 @@ from model.http.info.content.ResponseModel import ResponseContent
 class AbstractHttpCommand(AbstractCommand):
     _my_http_engine: AbstractHttpEngine
 
-    def __init__(self, http_engine: AbstractHttpEngine, command_name: str, flags: set[AbstractFlag]):
-        super().__init__(command_name, flags, StringCommandFlagStrategy())
+    def __init__(self, http_engine: AbstractHttpEngine, command_name: str):
+        super().__init__(command_name, StringCommandFlagStrategy())
         self._my_http_engine = http_engine
         self._my_http_command_name = command_name
 
@@ -31,16 +30,18 @@ class HttpCommand(AbstractHttpCommand):
     def __init__(self, http_engine: AbstractHttpEngine):
         self._my_http_data_builder = HttpDataBuilder()
         super().__init__(http_engine,
-                         HTTP_COMMAND_NAME,
-                         get_all_http_method_flags(self._my_http_data_builder))
+                         HTTP_COMMAND_NAME)
 
     def execute_command(self, command: str) -> AbstractOutput:
-        flags: set[AbstractFlag] = self._my_flag_strategy.extract_flag_representation(
-            command)
+        flags: set[AbstractFlag] = self.prepare_flags(command)
         for flag in flags:
             # given the internal value it works with the builder
             flag.get_flag_value().match_value()
         return self._execute_http_command(self._my_http_data_builder.build())
+
+    def prepare_flags(self, command: str) -> set[AbstractFlag]:
+        # TODO: for each matched flag, we store the value into it
+        return self._my_flag_strategy.extract_flag_representation(command)
 
     def get_description(self) -> str:
         return f"Command name: {self._my_command_name}. \n" + super().get_description()

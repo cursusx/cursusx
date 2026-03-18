@@ -14,4 +14,5 @@ class AbstractExtractCommandFlagStrategy(ABC, Generic[_I]):
 
 class StringCommandFlagStrategy(AbstractExtractCommandFlagStrategy[str]):
     def extract_flag_representation(self, input_command: str) -> set[AbstractFlag]:
+        # TODO: for each flag, match it and store the value in the flag value.
         return set()
