@@ -1,5 +1,5 @@
 from model.parser.ParserModel import AbstractParser, Parser
-from test.mock.ServerMock import start_mock_server
+from test.mock.ServerMock import start_mock_server, kill_mock_server
 
 
 def test_should_be_possible_to_run_http_command():
@@ -7,4 +7,4 @@ def test_should_be_possible_to_run_http_command():
     command: str = "http -method=get -endpoint=localhost:8080"
     parser: AbstractParser = Parser()
     parser.execute_command(command)
-    server.shutdown()
+    kill_mock_server(server)
