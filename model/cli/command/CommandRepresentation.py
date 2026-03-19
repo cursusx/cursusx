@@ -36,6 +36,7 @@ class StringCommandFlagStrategy(AbstractExtractCommandFlagStrategy[str, _T]):
         all_flags: set[AbstractFlag] = set()
         for single_flag in array_of_flags:
             # a flag is of the type: -flag_name?(=value)
+            # TODO: Check if there is =, add a proper way for checking this value
             flag_name: str = single_flag.split('-')[1]
             all_flags.add(self._my_flag_factory.create_flag(
                 flag_name, self._my_query_data_builder))
