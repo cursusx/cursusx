@@ -22,13 +22,16 @@ class HttpMethodFlagValue(AbstractFlagValue[HttpDataBuilder]):
 
     def __init__(self, my_query_builder: HttpDataBuilder,
                  flag_value: str):
-        super().__init__(my_query_builder, flag_value)
+        super().__init__(my_query_builder, flag_value.upper())
         self.my_query_builder = my_query_builder
 
     def match_value(self) -> None:
         # match a value from the input val
+        if self._my_flag_value not in self._my_supported_values:
+            raise ValueError(
+                f"The input method {self._my_flag_value} is not supported. All the supported values are: {self._my_supported_values}.")
         self.my_query_builder.add_http_method(
-            HTTPMethod(value=self._my_flag_value.upper()))
+            HTTPMethod(value=self._my_flag_value))
 
 
 class HttpMethodFlag(AbstractFlag[HttpDataBuilder]):
