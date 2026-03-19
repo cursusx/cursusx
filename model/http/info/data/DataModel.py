@@ -2,7 +2,7 @@ from abc import ABC
 from http import HTTPMethod
 
 from model.builder.BuilderModel import AbstractBuilder
-from model.http.info.body.BodyModel import AbstractBody
+from model.http.info.body.BodyModel import AbstractBody, Body
 from model.http.info.content.RequestModel import RequestContent
 from model.http.info.endpoint.EndpointModel import AbstractEndpoint
 from model.http.info.header.HeaderModel import Headers
@@ -42,9 +42,9 @@ class HttpData(AbstractHttpData):
 
 class HttpDataBuilder(AbstractBuilder[HttpData]):
     _my_endpoint: AbstractEndpoint
-    _my_headers: Headers
-    _my_parameters: Parameters
-    _my_body: AbstractBody
+    _my_headers: Headers = Headers.empty()
+    _my_parameters: Parameters = Parameters.empty()
+    _my_body: AbstractBody = Body.empty()
     _my_http_method: HTTPMethod
 
     def add_http_method(self, method: HTTPMethod) -> 'HttpDataBuilder':
