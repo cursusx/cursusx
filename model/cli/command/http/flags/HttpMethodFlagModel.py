@@ -27,8 +27,8 @@ class HttpMethodFlagValue(AbstractFlagValue[HttpDataBuilder]):
 
     def match_value(self) -> None:
         # match a value from the input val
-        # TODO: extract from the flag value the http method to use
-        self.my_query_builder.add_http_method(HTTPMethod.GET)
+        self.my_query_builder.add_http_method(
+            HTTPMethod(value=self._my_flag_value.upper()))
 
 
 class HttpMethodFlag(AbstractFlag[HttpDataBuilder]):
