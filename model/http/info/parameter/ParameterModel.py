@@ -68,9 +68,6 @@ class Parameters(IterableContent[Iterable[tuple[str, str]]]):
 
     @classmethod
     def from_list(cls, parameters: Collection[Parameter]) -> 'Parameters':
-        if len(parameters) == 0:
-            raise ValueError(
-                "The input parameters collection cannot be empty.")
         return cls(_sentinel=_SENTINEL, my_parameters={param for param in parameters})
 
     @classmethod
