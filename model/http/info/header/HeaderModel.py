@@ -116,5 +116,9 @@ class Headers(IterableContent[Mapping[str, str]]):
         return cls(_sentinel=_SENTINEL, headers=[header for header in headers if header])
 
     @classmethod
+    def empty(cls) -> 'Headers':
+        return cls(_sentinel=_SENTINEL, headers=[])
+
+    @classmethod
     def from_dictionary(cls, headers: Mapping[str, str]) -> 'Headers':
         return cls(_sentinel=_SENTINEL, headers=[Header.from_tuple((key, value)) for key, value in headers.items()])
