@@ -9,17 +9,26 @@ from model.http.engine.Engines import get_engine
 T = TypeVar('T')
 
 
-def get_command_parser() -> AbstractCommand:
-    return HttpCommand(http_engine=get_engine(STANDARD_ENGINE_NAME))
-
-
 class AbtractParserStrategy(ABC, Generic[T]):
+    """
+    Abtract class that defines the strategy for parsing the input query of the user.
+    This class allows to translate the input command of a given type into the actual command class.
+    """
     @abstractmethod
     def parse_command(self, command: T) -> AbstractCommand:
+        """
+        Parse the input command of the user and translate it into the actual class representation.
+        :param command: input command of the user to parse.
+        :return: actual class implementation.
+        """
         pass
 
 
 class CliParserStrategy(AbtractParserStrategy[str]):
+    """
+    Implementation for a CLI parser strategy, this class allows to work with input string type.
+    """
+
     def parse_command(self, command: str) -> AbstractCommand:
         if command == '':
             raise ValueError('Input command is empty!')
@@ -32,6 +41,13 @@ class CliParserStrategy(AbtractParserStrategy[str]):
 
 
 class ParserFactory(Generic[T]):
+    """
+    Factory class that allows to create an instance of the parser strategy.
+    In this way different implementation fo the command listener has its own implementation.
+
+    Current supported implementation:
+    1. from command line
+    """
     _my_strategy: AbtractParserStrategy[T]
 
     def __init__(self, command_parser: AbtractParserStrategy[T] = CliParserStrategy()):
