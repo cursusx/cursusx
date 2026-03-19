@@ -90,7 +90,7 @@ class Parameters(IterableContent[Iterable[tuple[str, str]]]):
                 'In order to create this class, use the factory method.')
         self._my_parameters = my_parameters
 
-    def get_parameters(self) -> Set[Parameter]:
+    def get_parameters_set(self) -> Set[Parameter]:
         """
         This method returns the collection of all parameters.
         :return: see above.

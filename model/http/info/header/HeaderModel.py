@@ -98,7 +98,7 @@ class Headers(IterableContent[Mapping[str, str]]):
         for header in headers:
             self._my_headers.add(header)
 
-    def get_headers(self) -> Set[AbstractHeader]:
+    def get_headers_set(self) -> Set[AbstractHeader]:
         return self._my_headers
 
     def dump(self) -> Mapping[str, str]:

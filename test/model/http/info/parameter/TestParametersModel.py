@@ -11,7 +11,7 @@ def test_should_have_duplicate_parameters() -> None:
         Parameter.from_key_value('c', 'd'),
         Parameter.from_key_value('a', 'b'),
     ])
-    assert len(parameters.get_parameters()) == 2
+    assert len(parameters.get_parameters_set()) == 2
 
     expected: Set[AbstractParameter] = {
         Parameter.from_key_value('a', 'b'),
@@ -19,7 +19,7 @@ def test_should_have_duplicate_parameters() -> None:
     }
 
     assert all(
-        parameters in expected for parameters in parameters.get_parameters())
+        parameters in expected for parameters in parameters.get_parameters_set())
 
 
 def test_should_raise_error_when_input_collection_is_empty() -> None:
