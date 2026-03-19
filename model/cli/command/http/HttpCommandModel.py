@@ -3,7 +3,6 @@ from abc import abstractmethod
 from model.cli.command.CommandModel import AbstractCommand
 from model.cli.command.CommandRepresentation import StringCommandFlagStrategy
 from model.cli.command.FlagModel import AbstractFlag
-from model.cli.command.OutputModel import AbstractOutput
 from model.cli.command.http.Contants import HTTP_COMMAND_NAME
 from model.cli.command.http.HttpOutputModel import HttpOutput
 from model.cli.command.http.flags.HttpFlagsFactory import HttpFlagFactory
@@ -12,7 +11,7 @@ from model.http.info.data.DataModel import AbstractHttpData, HttpDataBuilder
 from model.http.info.content.ResponseModel import ResponseContent
 
 
-class AbstractHttpCommand(AbstractCommand):
+class AbstractHttpCommand(AbstractCommand[HttpOutput]):
     _my_http_engine: AbstractHttpEngine
     _my_http_data_builder: HttpDataBuilder
 
@@ -25,7 +24,7 @@ class AbstractHttpCommand(AbstractCommand):
             self._my_http_data_builder, HttpFlagFactory()))
 
     @abstractmethod
-    def execute_command(self, command: str) -> AbstractOutput:
+    def execute_command(self, command: str) -> HttpOutput:
         pass
 
 
@@ -34,7 +33,7 @@ class HttpCommand(AbstractHttpCommand):
         super().__init__(http_engine,
                          HTTP_COMMAND_NAME)
 
-    def execute_command(self, command: str) -> AbstractOutput:
+    def execute_command(self, command: str) -> HttpOutput:
         flags: set[AbstractFlag] = self.prepare_flags(command)
         for flag in flags:
             # given the internal value it works with the builder
@@ -47,6 +46,6 @@ class HttpCommand(AbstractHttpCommand):
     def get_description(self) -> str:
         return f"Command name: {self._my_command_name}. \n" + super().get_description()
 
-    def _execute_http_command(self, request: AbstractHttpData) -> AbstractOutput:
+    def _execute_http_command(self, request: AbstractHttpData) -> HttpOutput:
         response: ResponseContent = self._my_http_engine.do_query(request)
         return HttpOutput(response)
