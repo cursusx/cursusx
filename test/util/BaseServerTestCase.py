@@ -10,8 +10,8 @@ class BaseServerTestCase(unittest.TestCase):
     _port: int
     my_server: HTTPServer
 
-    def __init__(self, url: str, port: int):
-        super().__init__()
+    def __init__(self, url: str, port: int, method_name: str = "runTest"):
+        super().__init__(method_name)
         self.url = url
         self._port = port
 
