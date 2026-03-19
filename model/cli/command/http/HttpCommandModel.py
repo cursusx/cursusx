@@ -14,12 +14,15 @@ from model.http.info.content.ResponseModel import ResponseContent
 
 class AbstractHttpCommand(AbstractCommand):
     _my_http_engine: AbstractHttpEngine
+    _my_http_data_builder: HttpDataBuilder
 
     def __init__(self, http_engine: AbstractHttpEngine, command_name: str):
-        super().__init__(command_name, StringCommandFlagStrategy(
-            HttpDataBuilder(), HttpFlagFactory()))
+        self._my_http_data_builder = HttpDataBuilder()
         self._my_http_engine = http_engine
         self._my_http_command_name = command_name
+
+        super().__init__(command_name, StringCommandFlagStrategy(
+            self._my_http_data_builder, HttpFlagFactory()))
 
     @abstractmethod
     def execute_command(self, command: str) -> AbstractOutput:
@@ -27,12 +30,9 @@ class AbstractHttpCommand(AbstractCommand):
 
 
 class HttpCommand(AbstractHttpCommand):
-    _my_http_data_builder: HttpDataBuilder
-
     def __init__(self, http_engine: AbstractHttpEngine):
         super().__init__(http_engine,
                          HTTP_COMMAND_NAME)
-        self._my_http_data_builder = HttpDataBuilder()
 
     def execute_command(self, command: str) -> AbstractOutput:
         flags: set[AbstractFlag] = self.prepare_flags(command)
