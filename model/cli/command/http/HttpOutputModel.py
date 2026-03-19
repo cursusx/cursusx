@@ -7,4 +7,6 @@ class HttpOutput(AbstractOutput[ResponseContent]):
         super().__init__(output)
 
     def wrap_output(self) -> str:
-        return f"Got the following status code from the command: {self.get_output().get_status_code()}"
+        output: str = f"Got the following status code from the command: {self.get_output().get_status_code()}\n"
+        output += f"Headers:\n{self.get_output().get_headers()}"
+        return output
