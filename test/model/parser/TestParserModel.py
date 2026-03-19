@@ -15,4 +15,5 @@ class ParseTest(BaseServerTestCase):
 
     def test_should_be_possible_to_run_http_command(self) -> None:
         command: str = "http -method=get -endpoint=http://localhost:8080"
-        ParserFactory.from_command(command).execute_command(command)
+        ParserFactory[str]().from_command(
+            input_command=command).execute_command(command)
