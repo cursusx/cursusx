@@ -1,3 +1,4 @@
+import threading
 from abc import abstractmethod, ABC
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
@@ -38,6 +39,8 @@ class BasicMockHandler(AbstractMockHandler):
         self.end_headers()
 
 
-def create_mock_server(url: str, port: int, mock_handler: type[AbstractMockHandler]) -> HTTPServer:
-    # type: ignore[arg-type]
-    return HTTPServer(server_address=(url, port), RequestHandlerClass=mock_handler)
+def start_mock_server(url: str, port: int, mock_handler: type[AbstractMockHandler] = BasicMockHandler) -> HTTPServer:
+    server: HTTPServer = HTTPServer(server_address=(
+        url, port), RequestHandlerClass=mock_handler)
+    threading.Thread(target=server.serve_forever).start()
+    return server
