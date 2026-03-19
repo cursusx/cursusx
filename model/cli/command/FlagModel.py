@@ -18,9 +18,11 @@ class AbstractFlagValue(ABC, Generic[_T]):
     """
     _my_query_builder: _T
     _my_representation: Pattern
+    _my_flag_value: str
 
-    def __init__(self, my_query_builder: _T):
+    def __init__(self, my_query_builder: _T, flag_value: str):
         self._my_query_builder = my_query_builder
+        self._my_flag_value = flag_value
 
     def is_valid_flag_value(self, flag_value: str) -> bool:
         """
@@ -49,8 +51,7 @@ class AbstractFlag(ABC, Generic[_T]):
     _my_name: str
     _my_flag_value: AbstractFlagValue[_T]
 
-    def __init__(self, my_name: str, my_flag_value: AbstractFlagValue[_T]):
-        self._my_name = my_name
+    def __init__(self, my_flag_value: AbstractFlagValue[_T]):
         self._my_flag_value = my_flag_value
 
     @abstractmethod

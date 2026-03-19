@@ -20,8 +20,9 @@ class HttpMethodFlagValue(AbstractFlagValue[HttpDataBuilder]):
     }
     _my_representation: Pattern = re.compile(r"-method=*")  # TODO
 
-    def __init__(self, my_query_builder: HttpDataBuilder):
-        super().__init__(my_query_builder)
+    def __init__(self, my_query_builder: HttpDataBuilder,
+                 flag_value: str):
+        super().__init__(my_query_builder, flag_value)
         self.my_query_builder = my_query_builder
 
     def match_value(self) -> None:
@@ -31,8 +32,9 @@ class HttpMethodFlagValue(AbstractFlagValue[HttpDataBuilder]):
 
 
 class HttpMethodFlag(AbstractFlag[HttpDataBuilder]):
-    def __init__(self, value: AbstractFlagValue[HttpDataBuilder]):
-        super().__init__(HTTP_FLAG_METHOD, value)
+    def __init__(self, my_flag_value: AbstractFlagValue[HttpDataBuilder]):
+        self._my_name = HTTP_FLAG_METHOD
+        super().__init__(my_flag_value)
 
     def get_flag_descritpion(self) -> str:
         return "Allows to specify the http method. The current supported methods are:"
