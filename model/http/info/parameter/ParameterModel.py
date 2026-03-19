@@ -61,7 +61,7 @@ class Parameter(AbstractParameter):
         """
         if len(parameter) != 2:
             raise TypeError("The input tuple has to have a size of two.")
-        if parameter[0] is None or parameter[1] is None:
+        if parameter[0] is '' or parameter[1] is '':
             raise TypeError("The input values has to be different from None.")
         return cls(_sentinel=_SENTINEL, key=parameter[0], value=parameter[1])
 
