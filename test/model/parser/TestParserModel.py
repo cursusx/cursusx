@@ -1,9 +1,6 @@
 from http import HTTPStatus
 from typing import cast
 
-from model.cli.command.CommandModel import AbstractCommand
-from model.cli.command.OutputModel import AbstractOutput
-from model.cli.command.http.HttpCommandModel import HttpCommand
 from model.cli.command.http.HttpOutputModel import HttpOutput
 from model.parser.ParserModel import ParserFactory
 from test.util.BaseServerTestCase import BaseServerTestCase
