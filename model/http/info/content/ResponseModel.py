@@ -16,7 +16,7 @@ class ResponseContent(AbstractContent):
     _my_status: HTTPStatus
 
     def __init__(self, _sentinel: object = None, *, endpoint: AbstractEndpoint, status_code: HTTPStatus, headers: Headers, parameters: Parameters, body: AbstractBody) -> None:
-        if _sentinel is _SENTINEL:
+        if _sentinel is None:
             raise TypeError(
                 "In order to create a Response you have to use the factory http.")
         super().__init__(endpoint, headers, parameters, body)
