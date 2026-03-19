@@ -74,5 +74,9 @@ class Parameters(IterableContent[Iterable[tuple[str, str]]]):
         return cls(_sentinel=_SENTINEL, my_parameters={param for param in parameters})
 
     @classmethod
+    def empty(cls) -> 'Parameters':
+        return cls(_sentinel=_SENTINEL, my_parameters=set())
+
+    @classmethod
     def from_tuples(cls, parameters: Collection[tuple[str, str]]) -> 'Parameters':
         return cls(_sentinel=_SENTINEL, my_parameters={Parameter.from_key_value(param[0], param[1]) for param in parameters})
