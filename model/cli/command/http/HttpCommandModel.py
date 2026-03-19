@@ -32,6 +32,7 @@ class HttpCommand(AbstractHttpCommand):
     def __init__(self, http_engine: AbstractHttpEngine):
         super().__init__(http_engine,
                          HTTP_COMMAND_NAME)
+        self._my_http_data_builder = HttpDataBuilder()
 
     def execute_command(self, command: str) -> AbstractOutput:
         flags: set[AbstractFlag] = self.prepare_flags(command)
