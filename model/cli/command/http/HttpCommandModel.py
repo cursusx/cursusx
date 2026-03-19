@@ -42,7 +42,6 @@ class HttpCommand(AbstractHttpCommand):
         return self._execute_http_command(self._my_http_data_builder.build())
 
     def prepare_flags(self, command: str) -> set[AbstractFlag]:
-        # TODO: for each matched flag, we store the value into it
         return self._my_flag_strategy.extract_flag_representation(command)
 
     def get_description(self) -> str:
