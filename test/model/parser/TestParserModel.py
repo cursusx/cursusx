@@ -1,6 +1,8 @@
 from http import HTTPStatus
+from typing import cast
 
 from model.cli.command.CommandModel import AbstractCommand
+from model.cli.command.OutputModel import AbstractOutput
 from model.cli.command.http.HttpCommandModel import HttpCommand
 from model.cli.command.http.HttpOutputModel import HttpOutput
 from model.parser.ParserModel import ParserFactory
@@ -15,5 +17,6 @@ class ParseTest(BaseServerTestCase):
 
     def test_should_be_possible_to_run_http_command(self) -> None:
         command: str = "http -method=get -endpoint=http://localhost:8080"
-        ParserFactory[str]().from_command(
-            input_command=command).execute_command(command)
+        output: HttpOutput = cast(HttpOutput, ParserFactory[str]().from_command(
+            input_command=command).execute_command(command))
+        assert output.get_output().get_status_code() == HTTPStatus.OK
