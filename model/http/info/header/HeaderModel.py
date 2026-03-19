@@ -104,6 +104,12 @@ class Headers(IterableContent[Mapping[str, str]]):
     def dump(self) -> Mapping[str, str]:
         return {header.get_header_name(): header.get_header_value() for header in self._my_headers}
 
+    def __repr__(self) -> str:
+        output: str = ""
+        for header in self._my_headers:
+            output += f"\t<{header.get_header_name()}>: <{header.get_header_value()}>\n"
+        return output
+
     @classmethod
     def from_list(cls, headers: Collection[AbstractHeader]) -> 'Headers':
         """
