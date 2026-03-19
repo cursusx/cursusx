@@ -34,6 +34,10 @@ class Body(AbstractBody):
         return cls(_sentinel=_SENTINEL, content=content)
 
     @classmethod
+    def empty(cls):
+        return cls(_sentinel=_SENTINEL, content='')
+
+    @classmethod
     def from_dict(cls, content: dict[Any, Any]) -> 'Body':
         """
         This factory method creates a Body from the input content dictionary.
