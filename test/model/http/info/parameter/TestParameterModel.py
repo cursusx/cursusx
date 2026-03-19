@@ -13,6 +13,12 @@ def test_should_raise_type_error_when_key_is_empty() -> None:
         Parameter.from_key_value('', 'avalue')
 
 
+def test_should_be_possible_to_create_parameter_from_tuple() -> None:
+    parameter = Parameter.from_tuple(('key', 'value'))
+    assert parameter.get_key() == 'key'
+    assert parameter.get_value() == 'value'
+
+
 def test_should_not_be_possible_to_use_parameter_constructor() -> None:
     with pytest.raises(TypeError):
         Parameter(None, key='a name', value='a value')
