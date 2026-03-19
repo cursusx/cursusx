@@ -7,6 +7,10 @@ _SENTINEL = object()
 
 
 class AbstractParameter(ABC):
+    """
+    This class represents an abstract representation of a parameter.
+    A parameter is a tuple of two strings: a key and a value.
+    """
     _my_key: str
     _my_value: str
 
@@ -15,9 +19,17 @@ class AbstractParameter(ABC):
         self._my_value = value
 
     def get_key(self) -> str:
+        """
+        Retrusn the parameter's key.
+        :return: see above.
+        """
         return self._my_key
 
     def get_value(self) -> str:
+        """
+        Retrun the parameter's value.
+        :return: see above.
+        """
         return self._my_value
 
     def __eq__(self, other) -> bool:
@@ -30,6 +42,10 @@ class AbstractParameter(ABC):
 
 
 class Parameter(AbstractParameter):
+    """
+    Actual implementation for a parameter.
+    """
+
     def __init__(self, _sentinel: object = None, *, key: str, value: str):
         if _sentinel is None:
             raise TypeError(
@@ -38,12 +54,21 @@ class Parameter(AbstractParameter):
 
     @classmethod
     def from_key_value(cls, key: str = '', value: str = '') -> 'Parameter':
+        """
+        Factory class that allows to create the Parameter class from a key and a string.
+        :param key: input parameter's key.
+        :param value: input parameter's value.
+        :return: a new Parameter object.
+        """
         if key == '' or value == '':
             raise TypeError("The key and the value cannot be empty.")
         return cls(_sentinel=_SENTINEL, key=key, value=value)
 
 
 class Parameters(IterableContent[Iterable[tuple[str, str]]]):
+    """
+    This class represents a collection of parameters.
+    """
     _my_parameters: set[Parameter]
 
     def __init__(self, _sentinel: object = None, *, my_parameters: set[Parameter]):
@@ -68,12 +93,26 @@ class Parameters(IterableContent[Iterable[tuple[str, str]]]):
 
     @classmethod
     def from_list(cls, parameters: Collection[Parameter]) -> 'Parameters':
-        return cls(_sentinel=_SENTINEL, my_parameters={param for param in parameters})
+        """
+        Factory method that allows to create the Parameters class from a list of parameters.
+        :param parameters: input collection of parameters
+        :return: a new Parameters object.
+        """
+        return cls(_sentinel=_SENTINEL, my_parameters={param for param in parameters if param})
 
     @classmethod
     def empty(cls) -> 'Parameters':
+        """
+        Factory method that creates an empty parameters object.
+        :return: see above.
+        """
         return cls(_sentinel=_SENTINEL, my_parameters=set())
 
     @classmethod
     def from_tuples(cls, parameters: Collection[tuple[str, str]]) -> 'Parameters':
+        """
+        Factory method that allows to create the Parameters class from a list of tuples.
+        :param parameters: input collection of parameters
+        :return: see above.
+        """
         return cls(_sentinel=_SENTINEL, my_parameters={Parameter.from_key_value(param[0], param[1]) for param in parameters})
