@@ -1,7 +1,15 @@
-class AbstractServerMock:
-    _my_url: str
-    _my_port: int
+from http.server import HTTPServer, BaseHTTPRequestHandler
 
-    def __init__(self, url: str, port: int):
-        self._my_url = url
-        self._my_port = port
+
+class BasicMockHandler(BaseHTTPRequestHandler):
+    def do_DELETE(self) -> None:
+        self.send_response(200)
+
+    def do_PUT(self) -> None:
+        self.send_response(200)
+
+    def do_POST(self) -> None:
+        self.send_response(200)
+
+    def do_GET(self) -> None:
+        self.send_response(200)
