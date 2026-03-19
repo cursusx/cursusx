@@ -44,3 +44,8 @@ def start_mock_server(url: str, port: int, mock_handler: type[AbstractMockHandle
         url, port), RequestHandlerClass=mock_handler)
     threading.Thread(target=server.serve_forever, daemon=True).start()
     return server
+
+
+def kill_mock_server(server: HTTPServer) -> None:
+    server.shutdown()
+    server.server_close()
