@@ -48,8 +48,7 @@ class HttpDataBuilder(AbstractBuilder[HttpData]):
     _my_http_method: HTTPMethod | None
 
     def __init__(self):
-        self._my_endpoint: AbstractEndpoint | None = BasicEndpoint.create_endpoint(
-            'localhost', 1)
+        self._my_endpoint: AbstractEndpoint | None = None
         self._my_headers: Headers = Headers.empty()
         self._my_parameters: Parameters = Parameters.empty()
         self._my_body: AbstractBody = Body.empty()
