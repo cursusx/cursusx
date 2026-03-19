@@ -1,35 +1,21 @@
-from abc import ABC, abstractmethod
-from typing import TypeVar, Generic, cast
-
 from model.cli.command.CommandModel import AbstractCommand
-from model.cli.command.OutputModel import AbstractOutput
-from model.cli.command.http.Contants import HTTP_COMMAND_NAME
+from model.cli.command.http.Contants import HTTP_COMMAND_NAME, STANDARD_ENGINE_NAME
 from model.cli.command.http.HttpCommandModel import HttpCommand
-from model.cli.command.http.HttpOutputModel import HttpOutput
 from model.http.engine.Engines import get_engine
-from model.http.engine.StandardHttpEngineModel import STANDARD_ENGINE_NAME
 
 
-_T = TypeVar("_T", bound=AbstractOutput)
+def get_command_parser() -> AbstractCommand:
+    return HttpCommand(http_engine=get_engine(STANDARD_ENGINE_NAME))
 
 
-class AbstractParser(ABC, Generic[_T]):
-    @abstractmethod
-    def _parse_command(self, input_command: str = '') -> AbstractCommand[_T]:
-        pass
-
-    def execute_command(self, command: str) -> _T:
-        return (self._parse_command(command)
-                .execute_command(command))
-
-
-class Parser(AbstractParser[_T]):
-    def _parse_command(self, input_command: str = '') -> AbstractCommand[_T]:
+class ParserFactory:
+    @staticmethod
+    def from_command(input_command: str) -> AbstractCommand:
         if input_command == '':
             raise ValueError('Input command is empty!')
         command_and_flags: list[str] = input_command.split(' ')
         command_name = command_and_flags[0]
 
         if command_name == HTTP_COMMAND_NAME:
-            return cast(AbstractCommand[_T], HttpCommand(get_engine(STANDARD_ENGINE_NAME)))
+            return get_command_parser()
         raise ValueError('Command is invalid!')
