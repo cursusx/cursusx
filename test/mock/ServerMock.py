@@ -42,5 +42,5 @@ class BasicMockHandler(AbstractMockHandler):
 def start_mock_server(url: str, port: int, mock_handler: type[AbstractMockHandler] = BasicMockHandler) -> HTTPServer:
     server: HTTPServer = HTTPServer(server_address=(
         url, port), RequestHandlerClass=mock_handler)
-    threading.Thread(target=server.serve_forever).start()
+    threading.Thread(target=server.serve_forever, daemon=True).start()
     return server
