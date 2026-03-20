@@ -104,6 +104,12 @@ class Parameters(IterableContent[Iterable[tuple[str, str]]]):
         """
         return [(parameter.get_key(), parameter.get_value()) for parameter in self._my_parameters]
 
+    def __repr__(self) -> str:
+        output: str = ""
+        for header in self._my_parameters:
+            output += f"\t<{header.get_key()}>: <{header.get_value()}>\n"
+        return output
+
     @classmethod
     def from_list(cls, parameters: Collection[Parameter]) -> 'Parameters':
         """
