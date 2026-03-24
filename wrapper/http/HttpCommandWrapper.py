@@ -6,7 +6,6 @@ from view.CommandWidget import CommandWidget
 from wrapper.http.BodyWrapper import BodyWrapper
 from wrapper.http.EndpointWrapper import EndpointWrapper
 from wrapper.http.HeadersWrapper import HeadersWrapper
-from wrapper.http.ParametersWrapper import ParametersWrapper
 
 
 class HttpCommandWrapper(CommandWidget):
@@ -37,7 +36,6 @@ class HttpCommandWrapper(CommandWidget):
      """
 
     _my_headers: HeadersWrapper
-    _my_parameters: ParametersWrapper
     _my_body: BodyWrapper
     _my_endpoint: EndpointWrapper
 
@@ -45,8 +43,6 @@ class HttpCommandWrapper(CommandWidget):
         super().__init__(**kwargs)
         self._my_headers = HeadersWrapper(
             http_output.get_output().get_headers())
-        self._my_parameters = ParametersWrapper(
-            http_output.get_output().get_parameters())
         self._my_body = BodyWrapper(
             http_output.get_output().get_body().get_content())
         self._my_endpoint = EndpointWrapper(
@@ -59,4 +55,3 @@ class HttpCommandWrapper(CommandWidget):
             with Vertical(classes="right-panel"):
                 yield self._my_body
                 yield self._my_headers
-                yield self._my_parameters
