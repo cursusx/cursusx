@@ -6,7 +6,7 @@ from textual.widgets import Collapsible, Pretty
 
 class DictionaryViewerItem(Collapsible):
     DEFAULT_CSS = """
-    DictionaryViewerItem: {
+    DictionaryViewerItem {
         margin: 1 2;
     }
     DictionaryViewerItem ScrollableContainer {

@@ -4,7 +4,7 @@ from textual.widgets import Collapsible, Pretty
 
 class StringViewerItem(Collapsible):
     DEFAULT_CSS = """
-       StringViewerItem: {
+       StringViewerItem {
            margin: 1 2;
        }
        StringViewerItem ScrollableContainer {
