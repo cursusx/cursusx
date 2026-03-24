@@ -98,7 +98,7 @@ class Headers(IterableContent[Mapping[str, str]]):
 
     _my_headers: Set[AbstractHeader] = set()
 
-    def __init__(self, _sentinel: object = None, *, headers: Collection[AbstractHeader]):
+    def __init__(self, _sentinel: object = None, *, headers: Set[AbstractHeader]):
         if _sentinel is not _SENTINEL:
             raise TypeError(
                 "In order to create the Headers class you have to use the factory methods.")
@@ -127,20 +127,20 @@ class Headers(IterableContent[Mapping[str, str]]):
         """
         if len(headers) == 0:
             raise ValueError('The input collection must not be empty.')
-        return cls(_sentinel=_SENTINEL, headers=[header for header in headers if header])
+        return cls(_sentinel=_SENTINEL, headers={header for header in headers if header})
 
     @classmethod
     def empty(cls) -> 'Headers':
-        return cls(_sentinel=_SENTINEL, headers=[])
+        return cls(_sentinel=_SENTINEL, headers=set())
 
     @classmethod
     def from_dictionary(cls, headers: Mapping[str, str]) -> 'Headers':
-        return cls(_sentinel=_SENTINEL, headers=[Header.from_key_value(key, value) for key, value in headers.items()])
+        return cls(_sentinel=_SENTINEL, headers={Header.from_key_value(key, value) for key, value in headers.items()})
 
     @classmethod
     def from_string(cls, content: str) -> 'Headers':
         try:
             headers: Mapping[str, str] = json.loads(content)
-            return cls(_sentinel=_SENTINEL, headers=[Header.from_key_value(key, value) for key, value in headers.items()])
+            return cls(_sentinel=_SENTINEL, headers={Header.from_key_value(key, value) for key, value in headers.items()})
         except json.JSONDecodeError:
             raise ValueError('The input content is not a valid json string.')
