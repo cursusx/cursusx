@@ -1,5 +1,6 @@
 from textual.app import ComposeResult
 from textual.containers import Horizontal, Vertical
+from textual.widgets import Header, Label
 
 from model.cli.command.http.HttpOutputModel import HttpOutput
 from view.CommandWidget import CommandWidget
@@ -14,7 +15,7 @@ class HttpCommandWrapper(CommandWidget):
      HttpCommandWidget {
          height: auto;
      }
-
+     
      .left-panel {
          width: 50%;
          padding: 1;
@@ -53,6 +54,8 @@ class HttpCommandWrapper(CommandWidget):
             http_output.get_output().get_status_code())
 
     def compose(self) -> ComposeResult:
+        with Header():
+            yield Label(content="Http command")
         with Horizontal():
             with Vertical(classes="left-panel"):
                 yield self._my_endpoint
