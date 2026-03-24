@@ -62,7 +62,7 @@ class Parameter(AbstractParameter):
         """
         if len(parameter) != 2:
             raise TypeError("The input tuple has to have a size of two.")
-        if parameter[0] is '' or parameter[1] is '':
+        if parameter[0] == '' or parameter[1] == '':
             raise TypeError("The input values has to be different from None.")
         return cls(_sentinel=_SENTINEL, key=parameter[0], value=parameter[1])
 
@@ -79,7 +79,7 @@ class Parameter(AbstractParameter):
         return cls(_sentinel=_SENTINEL, key=key, value=value)
 
 
-class Parameters(IterableContent[Iterable[tuple[str, str]]]):
+class Parameters(IterableContent[Mapping[str, str]]):
     """
     This class represents a collection of parameters.
     """
@@ -98,12 +98,12 @@ class Parameters(IterableContent[Iterable[tuple[str, str]]]):
         """
         return self._my_parameters
 
-    def dump(self) -> Iterable[tuple[str, str]]:
+    def dump(self) -> Mapping[str, str]:
         """
         This method returns all the parameters of the class.
         :return: see above
         """
-        return [(parameter.get_key(), parameter.get_value()) for parameter in self._my_parameters]
+        return {parameter.get_key(): parameter.get_value() for parameter in self._my_parameters}
 
     def __repr__(self) -> str:
         output: str = ""
