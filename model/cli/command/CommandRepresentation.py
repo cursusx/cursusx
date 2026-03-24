@@ -42,7 +42,6 @@ class StringCommandFlagStrategy(AbstractExtractCommandFlagStrategy[str, _T]):
         all_flags: set[AbstractFlag] = set()
         for matches in self._my_flag_with_value_regex.finditer(rest):
             if matches:
-                print(matches)
                 flag_value: str = matches.group(2) if matches.group(2) else ''
                 all_flags.add(self._my_flag_factory.create_flag(
                     matches.group(1), flag_value, self._my_query_data_builder))

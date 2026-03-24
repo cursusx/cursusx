@@ -7,7 +7,6 @@ from model.http.info.body.BodyModel import AbstractBody
 from model.http.info.header.HeaderModel import Headers
 from model.http.info.parameter.ParameterModel import Parameters
 
-# TODO: ADD TESTS
 _SENTINEL = object()
 
 _T = TypeVar('_T', bound=Iterable)
