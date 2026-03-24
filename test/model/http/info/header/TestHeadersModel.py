@@ -5,7 +5,7 @@ import pytest
 from model.http.info.header.HeaderModel import Headers, Header, AbstractHeader
 
 
-def test_should_have_duplicate_headers() -> None:
+def test_should_not_have_duplicate_headers() -> None:
     headers: Headers = Headers.from_list([
         Header.from_tuple(('a', 'b')),
         Header.from_tuple(('a', 'b')),
