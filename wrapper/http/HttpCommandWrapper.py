@@ -1,11 +1,13 @@
 from textual.app import ComposeResult
 from textual.containers import Horizontal, Vertical
+from textual.widgets import Header, Label
 
 from model.cli.command.http.HttpOutputModel import HttpOutput
 from view.CommandWidget import CommandWidget
 from wrapper.http.BodyWrapper import BodyWrapper
 from wrapper.http.EndpointWrapper import EndpointWrapper
 from wrapper.http.HeadersWrapper import HeadersWrapper
+from wrapper.http.StatusCodeWrapper import StatusCodeWrapper
 
 
 class HttpCommandWrapper(CommandWidget):
@@ -13,7 +15,7 @@ class HttpCommandWrapper(CommandWidget):
      HttpCommandWidget {
          height: auto;
      }
-
+     
      .left-panel {
          width: 50%;
          padding: 1;
@@ -36,6 +38,7 @@ class HttpCommandWrapper(CommandWidget):
      """
 
     _my_headers: HeadersWrapper
+    _my_status_code: StatusCodeWrapper
     _my_body: BodyWrapper
     _my_endpoint: EndpointWrapper
 
@@ -47,11 +50,16 @@ class HttpCommandWrapper(CommandWidget):
             http_output.get_output().get_body().get_content())
         self._my_endpoint = EndpointWrapper(
             http_output.get_output().get_endpoint().dump())
+        self._my_status_code = StatusCodeWrapper(
+            http_output.get_output().get_status_code())
 
     def compose(self) -> ComposeResult:
+        with Header():
+            yield Label(content="Http command")
         with Horizontal():
             with Vertical(classes="left-panel"):
                 yield self._my_endpoint
+                yield self._my_status_code
             with Vertical(classes="right-panel"):
                 yield self._my_body
                 yield self._my_headers
