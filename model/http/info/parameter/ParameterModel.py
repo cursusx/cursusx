@@ -1,5 +1,6 @@
+import json
 from abc import ABC
-from typing import Collection, Iterable, Set
+from typing import Collection, Iterable, Set, Mapping
 
 from model.http.info.IterableContentModel import IterableContent
 
@@ -118,6 +119,19 @@ class Parameters(IterableContent[Iterable[tuple[str, str]]]):
         :return: a new Parameters object.
         """
         return cls(_sentinel=_SENTINEL, my_parameters={param for param in parameters if param})
+
+    @classmethod
+    def from_json_string(cls, content: str) -> 'Parameters':
+        """
+        Factory method for creating a new Parameters object from a json string.
+        :param content: input json string
+        :return: a new Parameters object.
+        """
+        try:
+            params: Mapping[str, str] = json.loads(content)
+            return cls(_sentinel=_SENTINEL, my_parameters={Parameter.from_key_value(key, value) for key, value in params.items()})
+        except json.JSONDecodeError:
+            raise ValueError("The input parameter json string is not valid.")
 
     @classmethod
     def empty(cls) -> 'Parameters':
