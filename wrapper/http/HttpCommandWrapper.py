@@ -55,7 +55,7 @@ class HttpCommandWrapper(CommandWidget):
         with Horizontal():
             with Vertical(classes="left-panel"):
                 yield self._my_endpoint
-                yield self._my_body
             with Vertical(classes="right-panel"):
+                yield self._my_body
                 yield self._my_headers
                 yield self._my_parameters
