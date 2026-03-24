@@ -8,8 +8,6 @@ from model.builder.BuilderModel import AbstractBuilder
 
 _T = TypeVar("_T", bound=AbstractBuilder)
 
-# TODO: at each command, create a new query builder and pass it to each flag value
-
 
 class AbstractFlagValue(ABC, Generic[_T]):
     """
@@ -30,7 +28,6 @@ class AbstractFlagValue(ABC, Generic[_T]):
         :param flag_value: input string that represent the flag value
         :return: see above
         """
-        # TODO: Here then extract the value
         return self._my_representation.match(flag_value) is not None
 
     @abstractmethod
