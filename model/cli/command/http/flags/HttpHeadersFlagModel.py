@@ -8,9 +8,8 @@ class HttpHeadersFlagValue(AbstractFlagValue[HttpDataBuilder]):
         super().__init__(my_query_builder, flag_value)
 
     def match_value(self) -> None:
-        # TODO: Add factory from string.
         self._my_query_builder.add_headers(
-            Headers.from_dictionary({}))
+            Headers.from_string(self._my_flag_value))
 
 
 class HttpHeadersFlag(AbstractFlag[HttpDataBuilder]):
