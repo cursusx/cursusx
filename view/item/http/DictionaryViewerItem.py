@@ -4,12 +4,12 @@ from textual.containers import ScrollableContainer
 from textual.widgets import Collapsible, Pretty
 
 
-class HeadersItem(Collapsible):
+class DictionaryViewerItem(Collapsible):
     DEFAULT_CSS = """
-    HeadersItem: {
+    DictionaryViewerItem: {
         margin: 1 2;
     }
-    HeadersItem ScrollableContainer {
+    DictionaryViewerItem ScrollableContainer {
         border: round $primary;
         padding: 1 2;
         height: 80vh;
