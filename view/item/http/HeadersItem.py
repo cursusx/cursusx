@@ -6,4 +6,9 @@ class HeadersItem(Collapsible):
     HeadersItem: {
         margin: 1 2;
     }
+    HeadersItem ScrollableContainer {
+        border: round $primary;
+        padding: 1 2;
+        height: 80vh;
+    }
     """
