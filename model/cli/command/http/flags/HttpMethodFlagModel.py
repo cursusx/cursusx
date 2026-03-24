@@ -18,7 +18,6 @@ class HttpMethodFlagValue(AbstractFlagValue[HttpDataBuilder]):
         HTTPMethod.DELETE,
         HTTPMethod.PATCH
     }
-    _my_representation: Pattern = re.compile(r"-method=*")  # TODO
 
     def __init__(self, my_query_builder: HttpDataBuilder,
                  flag_value: str):
