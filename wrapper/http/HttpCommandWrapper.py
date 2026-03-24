@@ -1,6 +1,7 @@
 from textual.app import ComposeResult
 from textual.containers import Horizontal, Vertical
 
+from model.cli.command.http.HttpOutputModel import HttpOutput
 from view.CommandWidget import CommandWidget
 from wrapper.http.BodyWrapper import BodyWrapper
 from wrapper.http.EndpointWrapper import EndpointWrapper
@@ -40,16 +41,16 @@ class HttpCommandWrapper(CommandWidget):
     _my_body: BodyWrapper
     _my_endpoint: EndpointWrapper
 
-    def __init__(self, headers: HeadersWrapper,
-                 parameters: ParametersWrapper,
-                 body: BodyWrapper,
-                 endpoint: EndpointWrapper,
-                 **kwargs):
+    def __init__(self, http_output: HttpOutput, **kwargs):
         super().__init__(**kwargs)
-        self._my_headers = headers
-        self._my_parameters = parameters
-        self._my_body = body
-        self._my_endpoint = endpoint
+        self._my_headers = HeadersWrapper(
+            http_output.get_output().get_headers())
+        self._my_parameters = ParametersWrapper(
+            http_output.get_output().get_parameters())
+        self._my_body = BodyWrapper(
+            http_output.get_output().get_body().get_content())
+        self._my_endpoint = EndpointWrapper(
+            http_output.get_output().get_endpoint().dump())
 
     def compose(self) -> ComposeResult:
         with Horizontal():
