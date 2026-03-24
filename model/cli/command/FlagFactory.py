@@ -19,7 +19,7 @@ class AbstractFlagFactory(ABC):
                     builder: AbstractBuilder) -> AbstractFlag:
         if flag_name not in self._my_flags:
             raise KeyError(
-                f"{flag_name} not exist, specify the correct flagf name.")
+                f"{flag_name} not exist, specify the correct flag name.")
         return create_flag(flag_class=self._my_flags[flag_name][0],
                            flag_value_class=self._my_flags[flag_name][1],
                            flag_value=flag_value,
