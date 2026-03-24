@@ -1,5 +1,6 @@
 from model.cli.command.FlagModel import AbstractFlag, AbstractFlagValue
 from model.http.info.data.DataModel import HttpDataBuilder
+from model.http.info.parameter.ParameterModel import Parameters
 
 
 class HttpParametersFlagValue(AbstractFlagValue[HttpDataBuilder]):
@@ -7,7 +8,8 @@ class HttpParametersFlagValue(AbstractFlagValue[HttpDataBuilder]):
         super().__init__(my_query_builder, flag_value)
 
     def match_value(self) -> None:
-        pass
+        self._my_query_builder.add_parameters(
+            Parameters.from_json_string(self._my_flag_value))
 
 
 class HttpParametersFlag(AbstractFlag[HttpDataBuilder]):
