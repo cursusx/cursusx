@@ -10,5 +10,5 @@ class HttpOutput(AbstractOutput[ResponseContent]):
         output: str = f"Got the following status code from the command: {self.get_output().get_status_code()}\n"
         output += f"Headers:\n[ {self.get_output().get_headers()}]\n"
         output += f"Parameters:\n{self.get_output().get_parameters()}\n"
-        output += f"Body:\n{self.get_output().get_body()}\n"
+        output += f"Body:\n{self.get_output().get_body().get_content()}\n"
         return output
