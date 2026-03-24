@@ -1,4 +1,6 @@
+import re
 from abc import ABC, abstractmethod
+from re import Pattern, Match
 from typing import TypeVar, Generic
 
 
@@ -25,16 +27,9 @@ class AbstractExtractCommandFlagStrategy(ABC, Generic[_I, _T]):
         pass
 
 
-def _separate_flag_name_from_value(flag_value: str) -> tuple[str, str]:
-    if '=' in flag_value:
-        flag_object: list[str] = flag_value.split('=')
-        flag_name: str = flag_object[0]
-        flag_object_value: str = ''.join(flag_object[1:])
-        return flag_name, flag_object_value
-    return flag_value, ''
-
-
 class StringCommandFlagStrategy(AbstractExtractCommandFlagStrategy[str, _T]):
+    _my_flag_with_value_regex: Pattern[str] = re.compile(r'-(\w+)(?:=(\S+))?')
+
     def __init__(self, my_query_data_builder: AbstractBuilder[_T],
                  flag_factory: AbstractFlagFactory):
         super().__init__(my_query_data_builder, flag_factory)
@@ -45,9 +40,10 @@ class StringCommandFlagStrategy(AbstractExtractCommandFlagStrategy[str, _T]):
         all_flags: set[AbstractFlag] = set()
         for single_flag in array_of_flags:
             # a flag is of the type: -flag_name?(=value)
-            # TODO: Check if there is =, add a proper way for checking this value
-            flag: str = single_flag.split('-')[1]
-            (flag_name, flag_value) = _separate_flag_name_from_value(flag)
-            all_flags.add(self._my_flag_factory.create_flag(
-                flag_name, flag_value, self._my_query_data_builder))
+            matches: Match[str] | None = self._my_flag_with_value_regex.match(
+                single_flag)
+            if matches:
+                flag_value: str = matches.group(2) if matches.group(2) else ''
+                all_flags.add(self._my_flag_factory.create_flag(
+                    matches.group(1), flag_value, self._my_query_data_builder))
         return all_flags
