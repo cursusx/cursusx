@@ -7,6 +7,9 @@ from model.http.info.endpoint.EndpointModel import BasicEndpoint
 class HttpEndpointFlagValue(AbstractFlagValue[HttpDataBuilder]):
     def match_value(self) -> None:
         values: list[str] = self._my_flag_value.split(':')
+        if len(values) != 2:
+            raise Exception(
+                f"Invalid http endpoint value: {self._my_flag_value}, you should specify the ip and the port.")
         self._my_query_builder.add_endpoint(
             BasicEndpoint.create_endpoint(url=':'.join(values[0:2]), port=int(values[2])))
 
