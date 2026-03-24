@@ -96,13 +96,11 @@ class Headers(IterableContent[Mapping[str, str]]):
     This class represents a collection of headers.
     """
 
-    _my_headers: Set[AbstractHeader] = set()
-
     def __init__(self, _sentinel: object = None, *, headers: Set[AbstractHeader]):
         if _sentinel is not _SENTINEL:
             raise TypeError(
                 "In order to create the Headers class you have to use the factory methods.")
-
+        self._my_headers = set()
         for header in headers:
             self._my_headers.add(header)
 
