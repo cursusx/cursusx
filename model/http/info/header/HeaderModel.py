@@ -4,6 +4,8 @@ from typing import Set, Mapping
 
 from model.http.info.IterableContentModel import IterableContent
 
+import json
+
 _SENTINEL = object()
 
 
@@ -82,6 +84,12 @@ class Header(AbstractHeader):
             raise ValueError('The input value must not be empty and not None.')
         return cls(_sentinel=_SENTINEL, my_header_name=value[0], my_header_value=value[1])
 
+    @classmethod
+    def from_key_value(cls, key: str = '', value: str = '') -> 'AbstractHeader':
+        if key == '' or value == '':
+            raise ValueError('The key and value must not be empty.')
+        return cls(_sentinel=_SENTINEL, my_header_name=key, my_header_value=value)
+
 
 class Headers(IterableContent[Mapping[str, str]]):
     """
@@ -128,3 +136,11 @@ class Headers(IterableContent[Mapping[str, str]]):
     @classmethod
     def from_dictionary(cls, headers: Mapping[str, str]) -> 'Headers':
         return cls(_sentinel=_SENTINEL, headers=[Header.from_tuple((key, value)) for key, value in headers.items()])
+
+    @classmethod
+    def from_string(cls, content: str) -> 'Headers':
+        try:
+            headers: Mapping[str, str] = json.loads(content)
+            return cls(_sentinel=_SENTINEL, headers=[Header.from_tuple((key, value)) for key, value in headers.items()])
+        except json.JSONDecodeError:
+            raise ValueError('The input content is not a valid json string.')
