@@ -1,0 +1,15 @@
+repos:
+  - repo: local
+    hooks:
+      - id: pyright
+        name: pyright
+        entry: .venv/bin/pyright
+        language: system
+        types: [ python ]
+        pass_filenames: false
+      - id: autopep8
+        name: autopep8 checkstyle
+        entry: .venv/bin/autopep8
+        types: [ python ]
+        args: [ --in-place ]
+        language: system
