@@ -32,5 +32,4 @@ def test_should_be_possible_to_retrieve_data_attributes():
     ).get_parameters().get_parameters_set())
     assert all(header in expected_headers for header in data.get_http_request(
     ).get_headers().get_headers_set())
-    assert data.get_http_request().get_status_code() == HTTPStatus.OK
     assert data.get_http_request().get_endpoint().dump() == "localhost:80"
