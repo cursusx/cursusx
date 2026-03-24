@@ -135,12 +135,12 @@ class Headers(IterableContent[Mapping[str, str]]):
 
     @classmethod
     def from_dictionary(cls, headers: Mapping[str, str]) -> 'Headers':
-        return cls(_sentinel=_SENTINEL, headers=[Header.from_tuple((key, value)) for key, value in headers.items()])
+        return cls(_sentinel=_SENTINEL, headers=[Header.from_key_value(key, value) for key, value in headers.items()])
 
     @classmethod
     def from_string(cls, content: str) -> 'Headers':
         try:
             headers: Mapping[str, str] = json.loads(content)
-            return cls(_sentinel=_SENTINEL, headers=[Header.from_tuple((key, value)) for key, value in headers.items()])
+            return cls(_sentinel=_SENTINEL, headers=[Header.from_key_value(key, value) for key, value in headers.items()])
         except json.JSONDecodeError:
             raise ValueError('The input content is not a valid json string.')
