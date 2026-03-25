@@ -1,0 +1,30 @@
+name: Publish on PyPI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  install:
+    name: Install package and Publish It
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout resources
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Setup python version
+        uses: uv python install
+
+      - name: Install package locally
+        run: uv pip install -e .
+
+      - name: Build project locally
+        run: uv build
+
+      - name: Publish package on PyPI
+        run: uv publish -t ${{secrets.PYPI_API_TOKEN}}
