@@ -1,7 +1,7 @@
 from cursusx.model.cli.command.OutputModel import AbstractOutput
 from cursusx.model.cli.command.http.HttpOutputModel import HttpOutput
 from cursusx.view.CommandWidget import CommandWidget
-from wrapper.http.HttpCommandWrapper import HttpCommandWrapper
+from cursusx.wrapper.http.HttpCommandWrapper import HttpCommandWrapper
 
 
 def get_viewer_command_widget[T](output: AbstractOutput[T]) -> CommandWidget:

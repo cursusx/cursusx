@@ -4,10 +4,10 @@ from textual.widgets import Header, Label
 
 from cursusx.model.cli.command.http.HttpOutputModel import HttpOutput
 from cursusx.view.CommandWidget import CommandWidget
-from wrapper.http.BodyWrapper import BodyWrapper
-from wrapper.http.EndpointWrapper import EndpointWrapper
-from wrapper.http.HeadersWrapper import HeadersWrapper
-from wrapper.http.StatusCodeWrapper import StatusCodeWrapper
+from cursusx.wrapper.http.BodyWrapper import BodyWrapper
+from cursusx.wrapper.http.EndpointWrapper import EndpointWrapper
+from cursusx.wrapper.http.HeadersWrapper import HeadersWrapper
+from cursusx.wrapper.http.StatusCodeWrapper import StatusCodeWrapper
 
 
 class HttpCommandWrapper(CommandWidget):

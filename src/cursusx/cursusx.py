@@ -3,8 +3,8 @@ import sys
 
 from cursusx.model.cli.command.OutputModel import AbstractOutput
 from cursusx.model.parser.ParserModel import ParserFactory
-from wrapper.CursusxViewerApp import CursusxViewerApp
-from wrapper.ViewCommandFactory import get_viewer_command_widget
+from cursusx.wrapper.CursusxViewerApp import CursusxViewerApp
+from cursusx.wrapper.ViewCommandFactory import get_viewer_command_widget
 
 PRETTY_OUTPUT = "pretty"
 
