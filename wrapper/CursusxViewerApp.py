@@ -1,11 +1,8 @@
-from typing import Coroutine, Any
-
-from textual import events
 from textual.app import App, ComposeResult
 from textual.binding import Binding
-from textual.widgets import Footer, Label, Header
+from textual.widgets import Footer
 
-from view.CommandWidget import CommandWidget
+from cursusx.view.CommandWidget import CommandWidget
 
 
 class CursusxViewerApp(App):

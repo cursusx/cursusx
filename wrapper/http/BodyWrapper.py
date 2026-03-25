@@ -1,4 +1,4 @@
-from view.item.StringViewerItem import StringViewerItem
+from cursusx.view.item.StringViewerItem import StringViewerItem
 
 
 class BodyWrapper(StringViewerItem):

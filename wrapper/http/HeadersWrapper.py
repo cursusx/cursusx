@@ -1,6 +1,6 @@
 
 from cursusx.model.http.info.header.HeaderModel import Headers
-from view.item.DictionaryViewerItem import DictionaryViewerItem
+from cursusx.view.item.DictionaryViewerItem import DictionaryViewerItem
 
 
 class HeadersWrapper(DictionaryViewerItem):

@@ -1,4 +1,4 @@
-from view.item.LabelItem import LabelItem
+from cursusx.view.item.LabelItem import LabelItem
 
 
 class EndpointWrapper(LabelItem):

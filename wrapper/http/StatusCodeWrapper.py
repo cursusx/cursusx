@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from view.item.LabelItem import LabelItem
+from cursusx.view.item.LabelItem import LabelItem
 
 
 class StatusCodeWrapper(LabelItem):
