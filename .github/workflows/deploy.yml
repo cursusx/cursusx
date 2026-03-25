@@ -20,6 +20,12 @@ jobs:
       - name: Setup python version
         run: uv python install
 
+      - name: Create virtual environment
+        run: uv sync
+
+      - name: Activate VENV
+        run: source .venv/bin/activate
+
       - name: Install package locally
         run: uv pip install -e .
 
