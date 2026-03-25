@@ -18,6 +18,8 @@ def main():
         input_command=command).execute_command(command)
     if sys.argv[1] == PRETTY_OUTPUT:
         CursusxViewerApp(get_viewer_command_widget(output)).run()
+    else:
+        print(output.wrap_output())
 
 
 if __name__ == "__main__":
