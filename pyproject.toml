@@ -5,12 +5,16 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "requests>=2.32.5",
+    "textual>=8.1.1",
+]
+
+[dependency-groups]
+dev = [
     "autopep8>=2.3.2",
     "pre-commit>=4.5.1",
     "pyright>=1.1.408",
     "pytest>=9.0.2",
-    "requests>=2.32.5",
-    "textual>=8.1.1",
 ]
 
 [build-system]
@@ -33,6 +37,3 @@ include = ["src/"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/cursusx"]
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
