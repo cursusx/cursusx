@@ -1,7 +1,7 @@
 from model.cli.command.OutputModel import AbstractOutput
 from model.cli.command.http.HttpOutputModel import HttpOutput
 from view.CommandWidget import CommandWidget
-from wrapper.http.HttpCommandWrapper import HttpCommandWrapper
+from wrapper.output.http.HttpCommandWrapper import HttpCommandWrapper
 
 
 def get_viewer_command_widget[T](output: AbstractOutput[T]) -> CommandWidget:
