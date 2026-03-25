@@ -4,10 +4,10 @@ from textual.widgets import Header, Label
 
 from model.cli.command.http.HttpOutputModel import HttpOutput
 from view.CommandWidget import CommandWidget
-from wrapper.http.BodyWrapper import BodyWrapper
-from wrapper.http.EndpointWrapper import EndpointWrapper
-from wrapper.http.HeadersWrapper import HeadersWrapper
-from wrapper.http.StatusCodeWrapper import StatusCodeWrapper
+from wrapper.output.http.BodyWrapper import BodyWrapper
+from wrapper.output.http.EndpointWrapper import EndpointWrapper
+from wrapper.output.http.HeadersWrapper import HeadersWrapper
+from wrapper.output.http.StatusCodeWrapper import StatusCodeWrapper
 
 
 class HttpCommandWrapper(CommandWidget):
