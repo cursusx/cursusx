@@ -3,7 +3,7 @@ from typing import cast
 
 from model.cli.command.http.HttpOutputModel import HttpOutput
 from model.parser.ParserModel import ParserFactory
-from test.util.BaseServerTestCase import BaseServerTestCase
+from tests.util.BaseServerTestCase import BaseServerTestCase
 
 
 class ParseTest(BaseServerTestCase):

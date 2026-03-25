@@ -5,7 +5,7 @@ from model.http.info.content.ResponseModel import ResponseContent
 from model.http.info.endpoint.EndpointModel import AbstractEndpoint, BasicEndpoint
 from model.http.info.header.HeaderModel import Headers
 from model.http.info.parameter.ParameterModel import Parameters, Parameter
-from test.model.http.info.content.BaseContentTest import BaseContentTestCase
+from tests.model.http.info.content.BaseContentTest import BaseContentTestCase
 
 
 class TestResponse(BaseContentTestCase):
