@@ -1,6 +1,6 @@
 import pytest
 
-from model.http.info.parameter.ParameterModel import Parameter, AbstractParameter
+from cursusx.model.http.info.parameter.ParameterModel import Parameter, AbstractParameter
 
 
 def test_should_raise_type_error_when_value_is_empty() -> None:

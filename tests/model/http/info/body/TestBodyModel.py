@@ -1,6 +1,6 @@
 from typing import Any
 
-from model.http.info.body.BodyModel import AbstractBody, Body
+from cursusx.model.http.info.body.BodyModel import AbstractBody, Body
 
 
 def test_should_be_possible_to_create_empty_body():

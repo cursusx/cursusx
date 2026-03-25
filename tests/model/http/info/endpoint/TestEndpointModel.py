@@ -1,6 +1,6 @@
 import pytest
 
-from model.http.info.endpoint.EndpointModel import BasicEndpoint, AbstractEndpoint, UPPER_PORT_LIMIT
+from cursusx.model.http.info.endpoint.EndpointModel import BasicEndpoint, AbstractEndpoint, UPPER_PORT_LIMIT
 
 
 def test_should_be_possible_to_create_endpoint_with_url_and_port():

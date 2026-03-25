@@ -1,8 +1,7 @@
 from http import HTTPStatus
-from typing import cast
 
-from model.cli.command.http.HttpOutputModel import HttpOutput
-from model.parser.ParserModel import ParserFactory
+from cursusx.model.cli.command.http.HttpOutputModel import HttpOutput
+from cursusx.model.parser.ParserModel import ParserFactory
 from tests.util.BaseServerTestCase import BaseServerTestCase
 
 

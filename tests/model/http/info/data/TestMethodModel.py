@@ -1,11 +1,11 @@
-from http import HTTPMethod, HTTPStatus
+from http import HTTPMethod
 
-from model.http.info.body.BodyModel import Body
-from model.http.info.content.RequestModel import RequestContent, RequestContentBuilder
-from model.http.info.data.DataModel import AbstractHttpData, HttpData
-from model.http.info.endpoint.EndpointModel import BasicEndpoint
-from model.http.info.header.HeaderModel import Headers, Header, AbstractHeader
-from model.http.info.parameter.ParameterModel import Parameters, Parameter, AbstractParameter
+from cursusx.model.http.info.body.BodyModel import Body
+from cursusx.model.http.info.content.RequestModel import RequestContent, RequestContentBuilder
+from cursusx.model.http.info.data.DataModel import AbstractHttpData, HttpData
+from cursusx.model.http.info.endpoint.EndpointModel import BasicEndpoint
+from cursusx.model.http.info.header.HeaderModel import Headers, Header, AbstractHeader
+from cursusx.model.http.info.parameter.ParameterModel import Parameters, Parameter, AbstractParameter
 
 
 def test_should_be_possible_to_retrieve_data_attributes():

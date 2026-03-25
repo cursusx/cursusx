@@ -2,7 +2,7 @@ from typing import Set
 
 import pytest
 
-from model.http.info.header.HeaderModel import Headers, Header, AbstractHeader
+from cursusx.model.http.info.header.HeaderModel import Headers, Header, AbstractHeader
 
 
 def test_should_not_have_duplicate_headers() -> None:

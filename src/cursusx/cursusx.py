@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import sys
 
-from model.cli.command.OutputModel import AbstractOutput
-from model.parser.ParserModel import ParserFactory
+from cursusx.model.cli.command.OutputModel import AbstractOutput
+from cursusx.model.parser.ParserModel import ParserFactory
 from wrapper.CursusxViewerApp import CursusxViewerApp
 from wrapper.ViewCommandFactory import get_viewer_command_widget
 

@@ -1,5 +1,5 @@
-from model.cli.command.OutputModel import AbstractOutput
-from model.cli.command.http.HttpOutputModel import HttpOutput
+from cursusx.model.cli.command.OutputModel import AbstractOutput
+from cursusx.model.cli.command.http.HttpOutputModel import HttpOutput
 from view.CommandWidget import CommandWidget
 from wrapper.http.HttpCommandWrapper import HttpCommandWrapper
 

@@ -1,5 +1,5 @@
 
-from model.http.info.header.HeaderModel import Headers
+from cursusx.model.http.info.header.HeaderModel import Headers
 from view.item.DictionaryViewerItem import DictionaryViewerItem
 
 

@@ -1,12 +1,10 @@
 import unittest
-from abc import ABC
-from http import HTTPStatus
 
-from model.http.info.body.BodyModel import AbstractBody
-from model.http.info.content.ContentModel import AbstractContent
-from model.http.info.endpoint.EndpointModel import AbstractEndpoint
-from model.http.info.header.HeaderModel import Headers, AbstractHeader
-from model.http.info.parameter.ParameterModel import Parameters, Parameter, AbstractParameter
+from cursusx.model.http.info.body.BodyModel import AbstractBody
+from cursusx.model.http.info.content.ContentModel import AbstractContent
+from cursusx.model.http.info.endpoint.EndpointModel import AbstractEndpoint
+from cursusx.model.http.info.header.HeaderModel import Headers
+from cursusx.model.http.info.parameter.ParameterModel import Parameters
 
 
 class BaseContentTestCase(unittest.TestCase):

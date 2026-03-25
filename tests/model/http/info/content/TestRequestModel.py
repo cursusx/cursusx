@@ -1,10 +1,8 @@
-from http import HTTPStatus
-
-from model.http.info.body.BodyModel import Body, AbstractBody
-from model.http.info.content.RequestModel import RequestContent
-from model.http.info.endpoint.EndpointModel import AbstractEndpoint, BasicEndpoint
-from model.http.info.header.HeaderModel import Headers
-from model.http.info.parameter.ParameterModel import Parameters, Parameter
+from cursusx.model.http.info.body.BodyModel import Body, AbstractBody
+from cursusx.model.http.info.content.RequestModel import RequestContent
+from cursusx.model.http.info.endpoint.EndpointModel import AbstractEndpoint, BasicEndpoint
+from cursusx.model.http.info.header.HeaderModel import Headers
+from cursusx.model.http.info.parameter.ParameterModel import Parameters, Parameter
 from tests.model.http.info.content.BaseContentTest import BaseContentTestCase
 
 

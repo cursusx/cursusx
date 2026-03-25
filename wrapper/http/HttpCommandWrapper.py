@@ -2,7 +2,7 @@ from textual.app import ComposeResult
 from textual.containers import Horizontal, Vertical
 from textual.widgets import Header, Label
 
-from model.cli.command.http.HttpOutputModel import HttpOutput
+from cursusx.model.cli.command.http.HttpOutputModel import HttpOutput
 from view.CommandWidget import CommandWidget
 from wrapper.http.BodyWrapper import BodyWrapper
 from wrapper.http.EndpointWrapper import EndpointWrapper
