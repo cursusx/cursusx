@@ -1,4 +1,5 @@
 from view.item.StringViewerItem import StringViewerItem
+import json
 
 
 class BodyWrapper(StringViewerItem):
@@ -19,4 +20,7 @@ class BodyWrapper(StringViewerItem):
     """
 
     def __init__(self, content: str, title: str = "Body", **kwargs):
-        super().__init__(content, title, **kwargs)
+        try:
+            super().__init__(json.loads(content), title, **kwargs)
+        except json.decoder.JSONDecodeError:
+            super().__init__(content, title, **kwargs)
