@@ -1,7 +1,7 @@
 import unittest
 from http.server import HTTPServer
 
-from test.mock.ServerMock import start_mock_server, kill_mock_server
+from tests.mock.ServerMock import start_mock_server, kill_mock_server
 
 
 class BaseServerTestCase(unittest.TestCase):
