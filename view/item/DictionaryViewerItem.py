@@ -1,6 +1,6 @@
 from collections.abc import Mapping
 
-from textual.widgets import Collapsible, Pretty
+from textual.widgets import Collapsible
 
 from view.item.CustomScrollableContainer import CustomScrollableContainer
 
