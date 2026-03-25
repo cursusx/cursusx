@@ -18,7 +18,7 @@ jobs:
         uses: astral-sh/setup-uv@v7
 
       - name: Setup python version
-        uses: uv python install
+        run: uv python install
 
       - name: Install package locally
         run: uv pip install -e .
