@@ -1,13 +1,15 @@
 from collections.abc import Mapping
 
-from textual.containers import ScrollableContainer
 from textual.widgets import Collapsible, Pretty
+
+from view.item.CustomScrollableContainer import CustomScrollableContainer
 
 
 class DictionaryViewerItem(Collapsible):
+
     def __init__(self, values: Mapping[str, str], title: str, **kwargs):
         super().__init__(
-            ScrollableContainer(Pretty(values)),
+            CustomScrollableContainer(values),
             title=title,
             **kwargs
         )
