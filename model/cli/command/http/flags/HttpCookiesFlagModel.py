@@ -13,8 +13,8 @@ class HttpCookiesFlagValue(AbstractFlagValue[HttpDataBuilder]):
 
 
 class HttpCookiesFlag(AbstractFlag[HttpDataBuilder]):
-    def __init__(self, flag_value: AbstractFlagValue[HttpDataBuilder]):
-        super().__init__(flag_value)
+    def __init__(self, my_flag_value: AbstractFlagValue[HttpDataBuilder]):
+        super().__init__(my_flag_value)
 
     def get_flag_descritpion(self) -> str:
         return "Allows to specify all the cookies"
