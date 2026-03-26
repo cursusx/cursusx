@@ -1,6 +1,7 @@
 from model.cli.command.FlagFactory import AbstractFlagFactory
 from model.cli.command.http.Contants import HTTP_FLAG_METHOD, HTTP_FLAG_ENDPOINT, HTTP_FLAG_HEADERS, \
-    HTTP_FLAG_PARAMETERS
+    HTTP_FLAG_PARAMETERS, HTTP_FLAG_COOKIES
+from model.cli.command.http.flags.HttpCookiesFlagModel import HttpCookiesFlag, HttpCookiesFlagValue
 from model.cli.command.http.flags.HttpEndpointFlagModel import HttpEndpointFlag, HttpEndpointFlagValue
 from model.cli.command.http.flags.HttpHeadersFlagModel import HttpHeadersFlag, HttpHeadersFlagValue
 from model.cli.command.http.flags.HttpMethodFlagModel import HttpMethodFlag, HttpMethodFlagValue
@@ -13,4 +14,5 @@ class HttpFlagFactory(AbstractFlagFactory):
         HTTP_FLAG_ENDPOINT: (HttpEndpointFlag, HttpEndpointFlagValue),
         HTTP_FLAG_HEADERS: (HttpHeadersFlag, HttpHeadersFlagValue),
         HTTP_FLAG_PARAMETERS: (HttpParametersFlag, HttpParametersFlagValue),
+        HTTP_FLAG_COOKIES: (HttpCookiesFlag, HttpCookiesFlagValue),
     }
