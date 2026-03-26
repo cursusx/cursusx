@@ -21,5 +21,5 @@ class HeadersWrapper(DictionaryViewerItem):
     }
     """
 
-    def __init__(self, values: Headers = Headers.empty(), title: str = 'Headers', **kwargs) -> None:
+    def __init__(self, values: Headers = Headers.empty(), title: str = 'Headers', **kwargs):
         super().__init__(values.dump(), title, **kwargs)
