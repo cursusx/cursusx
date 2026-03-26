@@ -4,6 +4,7 @@ from http import HTTPMethod
 from model.builder.BuilderModel import AbstractBuilder
 from model.http.info.body.BodyModel import AbstractBody, Body
 from model.http.info.content.RequestModel import RequestContent
+from model.http.info.cookie.CookieModel import Cookies
 from model.http.info.endpoint.EndpointModel import AbstractEndpoint, BasicEndpoint
 from model.http.info.header.HeaderModel import Headers
 from model.http.info.parameter.ParameterModel import Parameters
@@ -45,6 +46,7 @@ class HttpDataBuilder(AbstractBuilder[HttpData]):
     _my_headers: Headers = Headers.empty()
     _my_parameters: Parameters = Parameters.empty()
     _my_body: AbstractBody = Body.empty()
+    _my_cookies: Cookies = Cookies.empty()
     _my_http_method: HTTPMethod | None
 
     def __init__(self):
@@ -74,11 +76,16 @@ class HttpDataBuilder(AbstractBuilder[HttpData]):
         self._my_body = body
         return self
 
+    def add_cookies(self, cookies: Cookies) -> 'HttpDataBuilder':
+        self._my_cookies = cookies
+        return self
+
     def build(self) -> HttpData:
         if self._my_http_method and self._my_headers and self._my_parameters and self._my_body and self._my_endpoint:
             return HttpData.create_data(self._my_http_method, RequestContent.create_request(endpoint=self._my_endpoint,
                                                                                             headers=self._my_headers,
                                                                                             parameters=self._my_parameters,
+                                                                                            cookies=self._my_cookies,
                                                                                             body=self._my_body))
         raise TypeError(
             "In order to create a HttpData class you have to specify all the parameters")

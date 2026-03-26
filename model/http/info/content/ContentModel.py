@@ -2,6 +2,7 @@ from abc import ABC
 from http import HTTPStatus
 from typing import Iterable, TypeVar
 
+from model.http.info.cookie.CookieModel import Cookies
 from model.http.info.endpoint.EndpointModel import AbstractEndpoint
 from model.http.info.body.BodyModel import AbstractBody
 from model.http.info.header.HeaderModel import Headers
@@ -22,11 +23,13 @@ class AbstractContent(ABC):
     _my_headers: Headers
     _my_parameters: Parameters
     _my_body: AbstractBody
+    _my_cookies: Cookies
 
-    def __init__(self, endpoint: AbstractEndpoint, headers: Headers, parameters: Parameters, body: AbstractBody):
+    def __init__(self, endpoint: AbstractEndpoint, headers: Headers, parameters: Parameters, cookies: Cookies, body: AbstractBody):
         self._my_endpoint = endpoint
         self._my_headers = headers
         self._my_parameters = parameters
+        self._my_cookies = cookies
         self._my_body = body
 
     def get_endpoint(self) -> AbstractEndpoint:
@@ -56,6 +59,13 @@ class AbstractContent(ABC):
         :return:
         """
         return self._my_parameters
+
+    def get_cookies(self) -> Cookies:
+        """
+        This method returns all the cookies.
+        :return:
+        """
+        return self._my_cookies
 
     def get_body(self) -> AbstractBody:
         """

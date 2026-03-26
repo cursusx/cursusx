@@ -21,15 +21,11 @@ class ResponseContent(AbstractContent):
         if _sentinel is None:
             raise TypeError(
                 "In order to create a Response you have to use the factory http.")
-        super().__init__(endpoint, headers, parameters, body)
+        super().__init__(endpoint, headers, parameters, cookies, body)
         self._my_status_code = status_code
-        self._my_cookies = cookies
 
     def get_status_code(self) -> HTTPStatus:
         return self._my_status_code
-
-    def get_cookies(self) -> Cookies:
-        return self._my_cookies
 
     @classmethod
     def create_response(cls, endpoint: AbstractEndpoint, status_code: HTTPStatus, headers: Headers, parameters: Parameters, cookies: Cookies, body: AbstractBody) -> 'ResponseContent':
