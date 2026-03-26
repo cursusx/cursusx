@@ -60,6 +60,12 @@ class Cookies(IterableContent[Mapping[str, str]]):
     def get_cookie(self, cookie_name: str) -> AbstractCookie:
         return self._my_cookies[cookie_name]
 
+    def __repr__(self):
+        output: str = ""
+        for cookie, val in self._my_cookies.items():
+            output += f"\t<{cookie}>: <{val.get_cookies_value()}>\n"
+        return output
+
     @classmethod
     def from_collection(cls, cookies: list[AbstractCookie]) -> 'Cookies':
         if not cookies:
