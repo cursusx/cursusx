@@ -2,6 +2,7 @@ from http import HTTPStatus
 
 from model.http.info.body.BodyModel import AbstractBody, Body
 from model.http.info.content.ResponseModel import ResponseContent
+from model.http.info.cookie.CookieModel import Cookies
 from model.http.info.endpoint.EndpointModel import AbstractEndpoint, BasicEndpoint
 from model.http.info.header.HeaderModel import Headers
 from model.http.info.parameter.ParameterModel import Parameters, Parameter
@@ -30,6 +31,8 @@ class TestResponse(BaseContentTestCase):
                                                          status_code=self._my_status_code,
                                                          headers=self._my_headers,
                                                          parameters=self._my_parameters,
+                                                         cookies=Cookies.from_collection(
+                                                             []),
                                                          body=self._my_body
                                                          ), method)
 

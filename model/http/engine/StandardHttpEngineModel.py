@@ -6,6 +6,7 @@ from requests import Response
 from model.cli.command.http.Contants import STANDARD_ENGINE_NAME
 from model.http.engine.HttpEngineModel import AbstractHttpEngine
 from model.http.info.body.BodyModel import Body
+from model.http.info.cookie.CookieModel import Cookies
 from model.http.info.header.HeaderModel import Headers
 from model.http.info.data.DataModel import AbstractHttpData
 from model.http.info.parameter.ParameterModel import Parameters
@@ -47,4 +48,6 @@ class StandardHttpEngine(AbstractHttpEngine):
                                                    response.headers),
                                                parameters=Parameters.from_list(
                                                    []),
+                                               cookies=Cookies.from_string_collection(
+                                                   response.cookies.items()),
                                                body=Body.from_string(response.text))
