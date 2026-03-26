@@ -1,6 +1,7 @@
 import json
 from abc import ABC
 from collections.abc import Mapping
+from typing import MutableMapping
 
 from model.http.info.IterableContentModel import IterableContent, _T
 
@@ -43,7 +44,7 @@ class Cookie(AbstractCookie):
         return cls(_sentinel=_SENTINEL, cookie_name=name, cookie_value=value)
 
 
-class Cookies(IterableContent[Mapping[str, str]]):
+class Cookies(IterableContent[MutableMapping[str, str]]):
     """
     Collection of Cookie objects.
     """
@@ -55,7 +56,7 @@ class Cookies(IterableContent[Mapping[str, str]]):
                 "In order to create the Cookies class you have to use the factory methods.")
         self._my_cookies = cookies
 
-    def dump(self) -> Mapping[str, str]:
+    def dump(self) -> MutableMapping[str, str]:
         return {name: value.get_cookies_value() for name, value in self._my_cookies.items()}
 
     def get_cookie(self, cookie_name: str) -> AbstractCookie:
