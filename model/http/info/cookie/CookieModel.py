@@ -67,6 +67,10 @@ class Cookies(IterableContent[Mapping[str, str]]):
         return cls(_sentinel=_SENTINEL, cookies={cookie.get_cookies_name(): cookie for cookie in cookies})
 
     @classmethod
+    def empty(cls) -> 'Cookies':
+        return cls(_sentinel=_SENTINEL, cookies={})
+
+    @classmethod
     def from_string_collection(cls, cookies: list[tuple[str, str]]) -> 'Cookies':
         if not cookies:
             raise ValueError("No cookies were given.")
