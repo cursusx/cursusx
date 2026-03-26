@@ -55,7 +55,7 @@ class Cookies(IterableContent[Mapping[str, str]]):
         self._my_cookies = cookies
 
     def dump(self) -> Mapping[str, str]:
-        return {f"{name}": f"{value.get_cookies_value()}" for name, value in self._my_cookies.items()}
+        return {name: value.get_cookies_value() for name, value in self._my_cookies.items()}
 
     def get_cookie(self, cookie_name: str) -> AbstractCookie:
         return self._my_cookies[cookie_name]
@@ -73,5 +73,5 @@ class Cookies(IterableContent[Mapping[str, str]]):
     @classmethod
     def from_string_collection(cls, cookies: list[tuple[str, str]]) -> 'Cookies':
         if not cookies:
-            raise ValueError("No cookies were given.")
+            return Cookies.empty()
         return cls(_sentinel=_SENTINEL, cookies={name: Cookie.from_key_value(name=name, value=value) for name, value in cookies})
