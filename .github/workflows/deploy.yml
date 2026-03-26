@@ -20,8 +20,14 @@ jobs:
       - name: Setup python version
         run: uv python install
 
-      - name: Create virtual environment
-        run: uv sync
+      - name: Sync dependencies
+        run: uv sync --dev
+
+      - name: Run all tests
+        run: uv run pytest
+
+      - name: Check python code
+        run: uv run pyright
 
       - name: Activate VENV
         run: source .venv/bin/activate
