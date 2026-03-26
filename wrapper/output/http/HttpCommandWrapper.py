@@ -5,6 +5,7 @@ from textual.widgets import Header, Label
 from model.cli.command.http.HttpOutputModel import HttpOutput
 from view.CommandWidget import CommandWidget
 from wrapper.output.http.BodyWrapper import BodyWrapper
+from wrapper.output.http.CookiesWrapper import CookiesWrapper
 from wrapper.output.http.EndpointWrapper import EndpointWrapper
 from wrapper.output.http.HeadersWrapper import HeadersWrapper
 from wrapper.output.http.StatusCodeWrapper import StatusCodeWrapper
@@ -81,6 +82,7 @@ class HttpCommandWrapper(CommandWidget):
     _my_status_code: StatusCodeWrapper
     _my_body: BodyWrapper
     _my_endpoint: EndpointWrapper
+    _my_cookies: CookiesWrapper
 
     def __init__(self, http_output: HttpOutput, **kwargs):
         super().__init__(**kwargs)
@@ -92,6 +94,8 @@ class HttpCommandWrapper(CommandWidget):
             http_output.get_output().get_endpoint().dump())
         self._my_status_code = StatusCodeWrapper(
             http_output.get_output().get_status_code())
+        self._my_cookies = CookiesWrapper(
+            http_output.get_output().get_cookies())
 
     def compose(self) -> ComposeResult:
         with Header():
@@ -105,3 +109,4 @@ class HttpCommandWrapper(CommandWidget):
                 yield Label("PAYLOAD", classes="panel-label")
                 yield self._my_body
                 yield self._my_headers
+                yield self._my_cookies
