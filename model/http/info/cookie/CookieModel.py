@@ -49,3 +49,9 @@ class Cookies(IterableContent[Mapping[str, str]]):
 
     def dump(self) -> Mapping[str, str]:
         return self._my_cookies
+
+    @classmethod
+    def from_collection(cls, cookies: list[AbstractCookie]) -> 'Cookies':
+        if not cookies or len(cookies) == 0:
+            raise ValueError("No cookies were given.")
+        return cls(_sentinel=_SENTINEL, cookies={cookie.get_cookies_name(): cookie.get_cookies_value() for cookie in cookies})
