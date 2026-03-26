@@ -1,0 +1,29 @@
+name: Run test and code checks
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-code:
+    name: Test code before merging into main
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout resources
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Setup python version
+        run: uv python install
+
+      - name: Create virtual environment
+        run: uv sync --dev
+      - name: Run all tests
+        run: uv run pytest
+
+      - name: Check python code
+        run: uv run pyright
