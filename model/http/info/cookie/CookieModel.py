@@ -25,6 +25,10 @@ class AbstractCookie(ABC):
 
 
 class Cookie(AbstractCookie):
+    """
+    Wrapper class for single cookie.
+    """
+
     def __init__(self, _sentinel: object = None, *, cookie_name: str, cookie_value: str):
         if _sentinel is None:
             raise Exception(
@@ -39,19 +43,26 @@ class Cookie(AbstractCookie):
 
 
 class Cookies(IterableContent[Mapping[str, str]]):
-    _my_cookies: Mapping[str, str]
+    """
+    Collection of Cookie objects.
+    """
+    _my_cookies: Mapping[str, AbstractCookie]
 
-    def __init__(self, _sentinel: object = None, *, cookies: Mapping[str, str]):
+    def __init__(self, _sentinel: object = None, *, cookies: Mapping[str, AbstractCookie]):
         if _sentinel is None:
             raise Exception(
                 "In order to create the Cookies class you have to use the factory methods.")
         self._my_cookies = cookies
 
     def dump(self) -> Mapping[str, str]:
-        return self._my_cookies
+        # TODO:
+        return {}
+
+    def get_cookie(self, cookie_name: str) -> AbstractCookie:
+        return self._my_cookies[cookie_name]
 
     @classmethod
     def from_collection(cls, cookies: list[AbstractCookie]) -> 'Cookies':
         if not cookies or len(cookies) == 0:
             raise ValueError("No cookies were given.")
-        return cls(_sentinel=_SENTINEL, cookies={cookie.get_cookies_name(): cookie.get_cookies_value() for cookie in cookies})
+        return cls(_sentinel=_SENTINEL, cookies={cookie.get_cookies_name(): cookie for cookie in cookies})
