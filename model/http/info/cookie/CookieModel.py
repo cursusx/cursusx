@@ -1,5 +1,7 @@
+import json
 from abc import ABC
 from collections.abc import Mapping
+from typing import MutableMapping
 
 from model.http.info.IterableContentModel import IterableContent, _T
 
@@ -42,7 +44,7 @@ class Cookie(AbstractCookie):
         return cls(_sentinel=_SENTINEL, cookie_name=name, cookie_value=value)
 
 
-class Cookies(IterableContent[Mapping[str, str]]):
+class Cookies(IterableContent[MutableMapping[str, str]]):
     """
     Collection of Cookie objects.
     """
@@ -54,7 +56,7 @@ class Cookies(IterableContent[Mapping[str, str]]):
                 "In order to create the Cookies class you have to use the factory methods.")
         self._my_cookies = cookies
 
-    def dump(self) -> Mapping[str, str]:
+    def dump(self) -> MutableMapping[str, str]:
         return {name: value.get_cookies_value() for name, value in self._my_cookies.items()}
 
     def get_cookie(self, cookie_name: str) -> AbstractCookie:
@@ -75,6 +77,15 @@ class Cookies(IterableContent[Mapping[str, str]]):
     @classmethod
     def empty(cls) -> 'Cookies':
         return cls(_sentinel=_SENTINEL, cookies={})
+
+    @classmethod
+    def from_string(cls, content: str) -> 'Cookies':
+        try:
+            headers: Mapping[str, str] = json.loads(content)
+            return cls(_sentinel=_SENTINEL,
+                       cookies={key: Cookie.from_key_value(key, value) for key, value in headers.items()})
+        except json.JSONDecodeError:
+            raise ValueError('The input content is not a valid json string.')
 
     @classmethod
     def from_string_collection(cls, cookies: list[tuple[str, str]]) -> 'Cookies':

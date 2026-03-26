@@ -40,6 +40,7 @@ class StandardHttpEngine(AbstractHttpEngine):
                                               url=request.get_http_request().get_endpoint().dump(),
                                               params=request.get_http_request().get_parameters().dump(),
                                               headers=request.get_http_request().get_headers().dump(),
+                                              cookies=request.get_http_request().get_cookies().dump(),
                                               data=request.get_http_request().get_body().get_content())
         return ResponseContent.create_response(endpoint=request.get_http_request().get_endpoint(),
                                                status_code=HTTPStatus(
