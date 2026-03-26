@@ -55,8 +55,7 @@ class Cookies(IterableContent[Mapping[str, str]]):
         self._my_cookies = cookies
 
     def dump(self) -> Mapping[str, str]:
-        # TODO:
-        return {}
+        return {f"{name}": f"{value.get_cookies_value()}" for name, value in self._my_cookies.items()}
 
     def get_cookie(self, cookie_name: str) -> AbstractCookie:
         return self._my_cookies[cookie_name]
