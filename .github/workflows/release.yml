@@ -1,0 +1,40 @@
+name: Create Automatic Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Release latest version
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout resources
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Setup python version
+        run: uv python install
+
+      - name: Create virtual environment
+        run: uv sync --dev
+
+      - name: Run all tests
+        run: uv run pytest
+
+      - name: Check python code
+        run: uv run pyright
+
+      - name: Check and return project version
+        id: uv-version
+        run: echo "VERSION=$(uv version --short)" >> $GITHUB_OUTPUT
+
+
+      - name: Create automatic release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{steps.uv-version.outputs.VERSION}}
