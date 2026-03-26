@@ -31,8 +31,7 @@ class TestResponse(BaseContentTestCase):
                                                          status_code=self._my_status_code,
                                                          headers=self._my_headers,
                                                          parameters=self._my_parameters,
-                                                         cookies=Cookies.from_collection(
-                                                             []),
+                                                         cookies=Cookies.empty(),
                                                          body=self._my_body
                                                          ), method)
 
