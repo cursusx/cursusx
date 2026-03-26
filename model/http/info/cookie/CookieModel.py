@@ -1,3 +1,4 @@
+import json
 from abc import ABC
 from collections.abc import Mapping
 
@@ -75,6 +76,15 @@ class Cookies(IterableContent[Mapping[str, str]]):
     @classmethod
     def empty(cls) -> 'Cookies':
         return cls(_sentinel=_SENTINEL, cookies={})
+
+    @classmethod
+    def from_string(cls, content: str) -> 'Cookies':
+        try:
+            headers: Mapping[str, str] = json.loads(content)
+            return cls(_sentinel=_SENTINEL,
+                       cookies={key: Cookie.from_key_value(key, value) for key, value in headers.items()})
+        except json.JSONDecodeError:
+            raise ValueError('The input content is not a valid json string.')
 
     @classmethod
     def from_string_collection(cls, cookies: list[tuple[str, str]]) -> 'Cookies':
