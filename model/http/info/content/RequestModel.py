@@ -30,7 +30,7 @@ class RequestContentBuilder(AbstractBuilder[RequestContent]):
     _my_endpoint: AbstractEndpoint
     _my_headers: Headers
     _my_parameters: Parameters
-    _my_cookies: Cookies
+    _my_cookies: Cookies = Cookies.empty()
     _my_body: AbstractBody
 
     def add_endpoint(self, endpoint: AbstractEndpoint) -> 'RequestContentBuilder':
@@ -47,6 +47,10 @@ class RequestContentBuilder(AbstractBuilder[RequestContent]):
 
     def add_body(self, body: AbstractBody) -> 'RequestContentBuilder':
         self._my_body = body
+        return self
+
+    def add_cookies(self, cookies: Cookies) -> 'RequestContentBuilder':
+        self._my_cookies = cookies
         return self
 
     def build(self) -> RequestContent:
