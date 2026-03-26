@@ -1,4 +1,7 @@
 from abc import ABC
+from collections.abc import Mapping
+
+from model.http.info.IterableContentModel import IterableContent, _T
 
 _SENTINEL = object()
 
@@ -33,3 +36,16 @@ class Cookie(AbstractCookie):
         if name == "" or value == "":
             raise ValueError("One of the input cookie's parameter are empty.")
         return cls(_sentinel=_SENTINEL, cookie_name=name, cookie_value=value)
+
+
+class Cookies(IterableContent[Mapping[str, str]]):
+    _my_cookies: Mapping[str, str]
+
+    def __init__(self, _sentinel: object = None, *, cookies: Mapping[str, str]):
+        if _sentinel is None:
+            raise Exception(
+                "In order to create the Cookies class you have to use the factory methods.")
+        self._my_cookies = cookies
+
+    def dump(self) -> Mapping[str, str]:
+        return self._my_cookies
