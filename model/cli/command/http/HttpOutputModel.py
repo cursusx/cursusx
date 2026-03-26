@@ -14,11 +14,15 @@ class HttpOutput(AbstractOutput[ResponseContent]):
 
         output = "╭" + "─" * 60 + "╮\n"
         output += f"│ ⚡ HTTP RESPONSE: {status_code} ({status_code.name})\n"
-        output += "├" + "─" * 60 + "┤\n"
+        output += self._draw_line()
 
         output += "│ 📋 HEADERS\n"
         output += f"│ {res.get_headers()}\n"
-        output += "├" + "─" * 60 + "┤\n"
+        output += self._draw_line()
+
+        output += "│ 📋 COOKIES\n"
+        output += f"│ {res.get_cookies()}\n"
+        output += self._draw_line()
 
         output += "│ 📄 BODY\n"
         body_content: str = res.get_body().get_content()
@@ -28,3 +32,6 @@ class HttpOutput(AbstractOutput[ResponseContent]):
 
         output += "╰" + "─" * 60 + "╯"
         return output
+
+    def _draw_line(self, length: int = 60) -> str:
+        return "├" + "─" * length + "┤\n"
