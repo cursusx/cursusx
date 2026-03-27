@@ -49,7 +49,7 @@ class HttpCommand(AbstractHttpCommand):
         flags: set[AbstractFlag] = self.prepare_flags(command)
         for flag in flags:
             if isinstance(flag, HttpHelpFlag):
-                return HttpHelpOutput('')
+                return HttpHelpOutput(self._create_help_description())
             # given the internal value it works with the builder
             flag.get_flag_value().match_value()
         return self._execute_http_command(self._my_http_data_builder.build())
@@ -64,6 +64,12 @@ class HttpCommand(AbstractHttpCommand):
 
     def get_description(self) -> str:
         return f"Command name: {self._my_command_name}. \n" + super().get_description()
+
+    def _create_help_description(self) -> str:
+        output: str = f"{self.get_description()}\n"
+        for description in HttpFlagFactory().get_all_flag_descriptions():
+            output += f"{description}\n"
+        return output
 
     def _execute_http_command(self, request: AbstractHttpData) -> HttpOutput:
         """
