@@ -35,3 +35,11 @@ class HttpOutput(AbstractOutput[ResponseContent]):
 
     def _draw_line(self, length: int = 60) -> str:
         return "├" + "─" * length + "┤\n"
+
+
+class HttpHelpOutput(AbstractOutput[str]):
+    def __init__(self, output: str):
+        super().__init__(output)
+
+    def wrap_output(self) -> str:
+        return self.get_output()
