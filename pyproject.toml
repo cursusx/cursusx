@@ -3,7 +3,7 @@ name = "cursusx"
 version = "0.1.4"
 description = "CLI Tool for network operation."
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 dependencies = [
     "requests>=2.33.0",
     "textual>=8.1.1",
