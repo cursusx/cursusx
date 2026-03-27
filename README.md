@@ -6,6 +6,15 @@
 
 ---
 
+
+## How to install it
+
+If you want to try this command, you can install It by running the following code:
+
+```bash
+pipx install cursusx
+```
+
 ## HTTP Command
 
 The `http` command lets you query any network endpoint. It is designed to be straightforward and expressive, without requiring boilerplate configuration files.
@@ -28,6 +37,7 @@ The `http` command lets you query any network endpoint. It is designed to be str
   -endpoint=http://127.0.0.1:5000 \
   -headers="{\"your\": \"headers\"}" \
   -parameters="{\"your\": \"parameters\"}"
+  -cookies="{\"your\": \"cookie\"}"
 ```
 
 ### Pretty output
@@ -39,18 +49,19 @@ Prefix any command with `pretty` to get a formatted, human-readable response ren
   -endpoint=http://127.0.0.1:5000 \
   -headers="{\"your\": \"headers\"}" \
   -parameters="{\"your\": \"parameters\"}"
+  -cookies="{\"your\": \"cookie\"}"
 ```
 
 ---
 
 ## Roadmap
 
-| Feature | Status |
-|---|---|
-| HTTP command | ✅ Available |
-| Cookies support | 🔜 Planned |
-| Authentication | 🔜 Planned |
-| Packet sniffing | 🔜 Planned |
+| Feature | Status       |
+|---|--------------|
+| HTTP command | ✅ Available  |
+| Cookies support | ✅ Available  |
+| Packet sniffing | 🔜 Planned   |
+| Authentication | 🔜 Planned   |
 
 ---
 
