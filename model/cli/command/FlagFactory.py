@@ -12,7 +12,10 @@ def create_flag(flag_class: type[AbstractFlag],
 
 
 class AbstractFlagFactory(ABC):
-    _my_flags: dict[str, tuple[type[AbstractFlag], type[AbstractFlagValue]]]
+    _my_flags: dict[str, tuple[type[AbstractFlag],
+                               type[AbstractFlagValue],
+                               str]
+                    ]
 
     def create_flag(self, flag_name: str,
                     flag_value: str,

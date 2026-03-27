@@ -10,9 +10,9 @@ from model.cli.command.http.flags.HttpParametersFlagModel import HttpParametersF
 
 class HttpFlagFactory(AbstractFlagFactory):
     _my_flags = {
-        HTTP_FLAG_METHOD: (HttpMethodFlag, HttpMethodFlagValue),
-        HTTP_FLAG_ENDPOINT: (HttpEndpointFlag, HttpEndpointFlagValue),
-        HTTP_FLAG_HEADERS: (HttpHeadersFlag, HttpHeadersFlagValue),
-        HTTP_FLAG_PARAMETERS: (HttpParametersFlag, HttpParametersFlagValue),
-        HTTP_FLAG_COOKIES: (HttpCookiesFlag, HttpCookiesFlagValue),
+        HTTP_FLAG_METHOD: (HttpMethodFlag, HttpMethodFlagValue, ""),
+        HTTP_FLAG_ENDPOINT: (HttpEndpointFlag, HttpEndpointFlagValue, ""),
+        HTTP_FLAG_HEADERS: (HttpHeadersFlag, HttpHeadersFlagValue, ""),
+        HTTP_FLAG_PARAMETERS: (HttpParametersFlag, HttpParametersFlagValue, ""),
+        HTTP_FLAG_COOKIES: (HttpCookiesFlag, HttpCookiesFlagValue, ""),
     }
