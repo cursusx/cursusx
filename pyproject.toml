@@ -35,5 +35,8 @@ venv = ".venv"
 [tool.hatch.build.targets.sdist]
 include = ["model", "view", "wrapper"]
 
+[tool.hatch.build.targets.wheel.force-include]
+"cursusx.py" = "cursusx.py"
+
 [tool.hatch.build.targets.wheel]
 packages = ["."]
