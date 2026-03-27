@@ -33,7 +33,7 @@ venvPath = "."
 venv = ".venv"
 
 [tool.hatch.build.targets.sdist]
-include = ["model", "view", "wrapper"]
+include = ["model", "view", "wrapper", "cursusx.py"]
 
 [tool.hatch.build.targets.wheel.force-include]
 "cursusx.py" = "cursusx.py"
