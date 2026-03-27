@@ -36,7 +36,7 @@ The `http` command lets you query any network endpoint. It is designed to be str
   -method=get \
   -endpoint=http://127.0.0.1:5000 \
   -headers="{\"your\": \"headers\"}" \
-  -parameters="{\"your\": \"parameters\"}"
+  -parameters="{\"your\": \"parameters\"}" \
   -cookies="{\"your\": \"cookie\"}"
 ```
 
@@ -48,7 +48,7 @@ Prefix any command with `pretty` to get a formatted, human-readable response ren
   -method=get \
   -endpoint=http://127.0.0.1:5000 \
   -headers="{\"your\": \"headers\"}" \
-  -parameters="{\"your\": \"parameters\"}"
+  -parameters="{\"your\": \"parameters\"}" \
   -cookies="{\"your\": \"cookie\"}"
 ```
 

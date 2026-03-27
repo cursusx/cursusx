@@ -12,7 +12,10 @@ def create_flag(flag_class: type[AbstractFlag],
 
 
 class AbstractFlagFactory(ABC):
-    _my_flags: dict[str, tuple[type[AbstractFlag], type[AbstractFlagValue]]]
+    _my_flags: dict[str, tuple[type[AbstractFlag],
+                               type[AbstractFlagValue],
+                               str]
+                    ]
 
     def create_flag(self, flag_name: str,
                     flag_value: str,
@@ -24,3 +27,6 @@ class AbstractFlagFactory(ABC):
                            flag_value_class=self._my_flags[flag_name][1],
                            flag_value=flag_value,
                            builder=builder)
+
+    def get_all_flag_descriptions(self) -> list[str]:
+        return [value[2] for key, value in self._my_flags.items()]
