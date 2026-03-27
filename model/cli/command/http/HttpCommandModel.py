@@ -4,14 +4,15 @@ from model.cli.command.CommandModel import AbstractCommand
 from model.cli.command.CommandRepresentation import StringCommandFlagStrategy
 from model.cli.command.FlagModel import AbstractFlag
 from model.cli.command.http.Contants import HTTP_COMMAND_NAME
-from model.cli.command.http.HttpOutputModel import HttpOutput
+from model.cli.command.http.HttpOutputModel import HttpOutput, HttpHelpOutput, AbstractHttpOutput
 from model.cli.command.http.flags.HttpFlagsFactory import HttpFlagFactory
+from model.cli.command.http.flags.HttpHelpFlagModel import HttpHelpFlag
 from model.http.engine.HttpEngineModel import AbstractHttpEngine
 from model.http.info.data.DataModel import AbstractHttpData, HttpDataBuilder
 from model.http.info.content.ResponseModel import ResponseContent
 
 
-class AbstractHttpCommand(AbstractCommand[HttpOutput]):
+class AbstractHttpCommand(AbstractCommand[AbstractHttpOutput]):
     """
     This class represent the definition of an http command, it works with the HttpOutput class.
 
@@ -31,7 +32,7 @@ class AbstractHttpCommand(AbstractCommand[HttpOutput]):
             self._my_http_data_builder, HttpFlagFactory()))
 
     @abstractmethod
-    def execute_command(self, command: str) -> HttpOutput:
+    def execute_command(self, command: str) -> AbstractHttpOutput:
         pass
 
 
@@ -44,9 +45,11 @@ class HttpCommand(AbstractHttpCommand):
         super().__init__(http_engine,
                          HTTP_COMMAND_NAME)
 
-    def execute_command(self, command: str) -> HttpOutput:
+    def execute_command(self, command: str) -> AbstractHttpOutput:
         flags: set[AbstractFlag] = self.prepare_flags(command)
         for flag in flags:
+            if isinstance(flag, HttpHelpFlag):
+                return HttpHelpOutput(self._create_help_description())
             # given the internal value it works with the builder
             flag.get_flag_value().match_value()
         return self._execute_http_command(self._my_http_data_builder.build())
@@ -61,6 +64,12 @@ class HttpCommand(AbstractHttpCommand):
 
     def get_description(self) -> str:
         return f"Command name: {self._my_command_name}. \n" + super().get_description()
+
+    def _create_help_description(self) -> str:
+        output: str = f"{self.get_description()}\n"
+        for description in HttpFlagFactory().get_all_flag_descriptions():
+            output += f"{description}\n"
+        return output
 
     def _execute_http_command(self, request: AbstractHttpData) -> HttpOutput:
         """

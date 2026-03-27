@@ -1,10 +1,21 @@
+from abc import ABC, abstractmethod
 from http import HTTPStatus
+from typing import TypeVar
 
 from model.cli.command.OutputModel import AbstractOutput
 from model.http.info.content.ResponseModel import ResponseContent
 
+_T = TypeVar("_T")
 
-class HttpOutput(AbstractOutput[ResponseContent]):
+
+class AbstractHttpOutput(AbstractOutput[_T]):
+
+    @abstractmethod
+    def wrap_output(self) -> str:
+        pass
+
+
+class HttpOutput(AbstractHttpOutput[ResponseContent]):
     def __init__(self, output: ResponseContent):
         super().__init__(output)
 
@@ -35,3 +46,11 @@ class HttpOutput(AbstractOutput[ResponseContent]):
 
     def _draw_line(self, length: int = 60) -> str:
         return "├" + "─" * length + "┤\n"
+
+
+class HttpHelpOutput(AbstractHttpOutput[str]):
+    def __init__(self, output: str):
+        super().__init__(output)
+
+    def wrap_output(self) -> str:
+        return self.get_output()

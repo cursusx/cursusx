@@ -6,6 +6,7 @@ HTTP_FLAG_HEADERS: str = "headers"
 HTTP_FLAG_PARAMETERS: str = "parameters"
 HTTP_FLAG_BODY: str = "body"
 HTTP_FLAG_COOKIES: str = "cookies"
+HTTP_FLAG_HELP: str = "help"
 
 # HTTP COMMAND NAME
 HTTP_COMMAND_NAME = "http"
